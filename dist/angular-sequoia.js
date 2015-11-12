@@ -18,7 +18,7 @@
         'tree': '=',
         'isSearching': '='
       },
-      link: function(scope, element, attrs) {
+      link: function(scope) {
         scope.search = function() {
           if(scope.query.length) {
             scope.isSearching = scope.query ? true : false;
@@ -53,10 +53,10 @@
       templateUrl: 'angular-sequoia.html',
       scope: {
         'treeNodes': '=sequoiaTree',
-        'model': '=',
+        'model': '=ngModel',
         'template': '=nodeTemplate'
       },
-      link: function(scope, element, attrs) {
+      link: function(scope) {
         scope.model = _.isArray(scope.model) ? scope.model : [];
         scope.breadcrumbs = [];
 
@@ -92,10 +92,11 @@
         scope.toggleSelected = function() {
           if(scope.onlySelected) {
             scope.onlySelected = false;
-            tree.setCurrentNodes();
+            tree.setCurrentNodes(tree.getNodesInPath());
           } else {
             scope.onlySelected = true;
             var selected = tree.findSelected(scope.model);
+            tree.setNodesInPath(tree.nodes);
             tree.setCurrentNodes(selected);
           }
         };
@@ -117,7 +118,7 @@
 (function() {
   'use strict';
 
-  function SequoiaTree($log) {
+  function SequoiaTreeFactory($log) {
 
     var _checkNodeStructure, _exists, _contains, _buildBreadCrumbs, _buildPath, _selected, _createNodeWithFullPathAsTitle;
 
@@ -223,6 +224,14 @@
       this.nodes = !_.isArray(nodes) ? this.tree : nodes;
     };
 
+    SequoiaTree.prototype.setNodesInPath = function(nodes) {
+      this.nodesInPath = !_.isArray(nodes) ? this.tree : nodes;
+    };
+
+    SequoiaTree.prototype.getNodesInPath = function() {
+      return _.isArray(this.nodesInPath) ? this.nodesInPath : this.tree;
+    };
+
     SequoiaTree.prototype.isValidNode = function(node) {
       return _.isObject(node) && node[this.template.nodes];
     };
@@ -250,8 +259,8 @@
           selected = _.union(selected, _selected(ids[i], this.tree, [], this.template));
         }
 
-        for(var i=0;i<selected.length;i++) {
-          results.push(_createNodeWithFullPathAsTitle(selected[i], this.tree,this.template));
+        for(var j=0;j<selected.length;j++) {
+          results.push(_createNodeWithFullPathAsTitle(selected[j], this.tree,this.template));
         }
       } else {
         $log.warn('You must pass an array of IDs in order to find the selected nodes!');
@@ -263,10 +272,10 @@
     return SequoiaTree;
   }
 
-  SequoiaTree.$inject = ['$log'];
+  SequoiaTreeFactory.$inject = ['$log'];
 
   angular.module('ngSequoia')
-    .factory('SequoiaTree', SequoiaTree);
+    .factory('SequoiaTree', SequoiaTreeFactory);
 
 })();
 
