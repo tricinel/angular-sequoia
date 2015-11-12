@@ -1,0 +1,115 @@
+@import 'config';
+
+/* Sequoia */
+.sequoia {
+
+  width: 100%;
+
+  /* Search */
+  .sequoia-search {
+    @include clearfix;
+    @extend %base-padding;
+
+    .sequoia-search-form,
+    .sequoia-actions,
+    input[type="text"],
+    .sequoia-search-form a {
+      float: left;
+    }
+
+    .sequoia-search-form {
+      @include clearfix;
+
+      width: 83.33333333%;
+
+      input[type="text"] {
+        @extend %form-padding;
+
+        border: 1px solid lighten($sequoia-gray, 30);
+        border-radius: $border-radius;
+        width: 90%;
+      }
+
+      a {
+        margin-left: 10px;
+      }
+    }
+
+    .sequoia-actions {
+      width: 16.66666667%;
+
+      ul {
+        @extend %list-unstyled;
+      }
+    }
+  }
+
+  /* Breadcrumbs */
+  .sequoia-breadcrumbs {
+    @extend %list-unstyled;
+
+    margin-left: 10px;
+
+    li {
+      padding-right: 0;
+
+      &:after {
+        content: ' »';
+      }
+
+      &:last-child:after {
+        content: '';
+      }
+    }
+  }
+
+  /* Tree */
+  .sequoia-tree {
+    list-style-type: none;
+    margin-left: -10px;
+    padding-left: 0;
+
+    li {
+      @include clearfix;
+      @extend %base-padding;
+
+      border-bottom: 1px solid lighten($sequoia-gray, 30);
+    }
+
+    .sequoia-item-title,
+    .sequoia-item-actions {
+      float: left;
+    }
+
+    .sequoia-item-title {
+      @extend %form-padding;
+
+      width: 83.33333333%;
+    }
+
+    .sequoia-item-actions {
+      width: 16.66666667%;
+    }
+  }
+
+  /* Buttons */
+  .sequoia-button {
+    @extend %base-button;
+
+    $colors: (primary: $sequoia-primary, success: $sequoia-success, danger: $sequoia-danger, info: $sequoia-info, warning: $sequoia-warning, default: $sequoia-gray);
+
+    @each $color, $sequoia-color in $colors {
+      &.sequoia-button-#{$color} {
+        background-color: $sequoia-color;
+        color: #fff;
+
+        &:hover {
+          background-color: darken($sequoia-color, 10);
+          border-color: darken($sequoia-color, 10);
+        }
+
+      }
+    }
+  }
+
+}

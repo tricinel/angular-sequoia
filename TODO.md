@@ -1,0 +1,1 @@
+* come up with a clever way to show the full path for long node names in search, breadcrumbs, selected

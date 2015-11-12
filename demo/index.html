@@ -1,0 +1,29 @@
+<!doctype html>
+<html class="no-js" lang="" ng-app="sequioaDemo">
+<head>
+  <base href="/">
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css">
+  <link rel="stylesheet" href="../dist/angular-sequoia.css">
+
+  <link rel="stylesheet" href="demo/demo.css">
+</head>
+<body>
+
+  <div data-ng-controller="MainController as vm">
+    <pre>{{ vm.selectedNodes | json }}</pre>
+
+    <div data-sequoia-tree="vm.tree" data-model="vm.selectedNodes"></div>
+  </div>
+
+  <script src="../bower_components/angular/angular.js"></script>
+
+  <script src="../dist/angular-sequoia.js"></script>
+  <script src="demo/demo.js"></script>
+</body>
+</html>

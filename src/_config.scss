@@ -1,0 +1,67 @@
+/* Variables */
+
+$sequoia-info: #3498db;
+$sequoia-primary: #1dd1ae;
+$sequoia-danger: #e74c3c;
+$sequoia-success: #2ecc71;
+$sequoia-warning: #e67e22;
+$sequoia-gray: #7f8c8d;
+
+$border-radius: 4px;
+
+/* Mixins */
+@mixin clearfix() {
+  &:before,
+  &:after {
+    content: " ";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+%base-padding {
+  padding: 10px 15px;
+}
+
+%form-padding {
+  padding: 6px 12px;
+}
+
+%base-button {
+  @extend %form-padding;
+
+  display: inline-block;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  touch-action: manipulation;
+  cursor: pointer;
+  user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: $border-radius;
+
+  &:hover,
+  &:active,
+  &:focus {
+    text-decoration: none;
+  }
+}
+
+%list-unstyled {
+  padding-left: 0;
+  margin-left: -5px;
+  list-style: none;
+
+  li {
+    display: inline-block;
+    padding-right: 5px;
+    padding-left: 5px;
+  }
+}
