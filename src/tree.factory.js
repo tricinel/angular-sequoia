@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  function SequoiaTree($log) {
+  function SequoiaTreeFactory($log) {
 
     var _checkNodeStructure, _exists, _contains, _buildBreadCrumbs, _buildPath, _selected, _createNodeWithFullPathAsTitle;
 
@@ -142,8 +142,8 @@
           selected = _.union(selected, _selected(ids[i], this.tree, [], this.template));
         }
 
-        for(var i=0;i<selected.length;i++) {
-          results.push(_createNodeWithFullPathAsTitle(selected[i], this.tree,this.template));
+        for(var j=0;j<selected.length;j++) {
+          results.push(_createNodeWithFullPathAsTitle(selected[j], this.tree,this.template));
         }
       } else {
         $log.warn('You must pass an array of IDs in order to find the selected nodes!');
@@ -155,9 +155,9 @@
     return SequoiaTree;
   }
 
-  SequoiaTree.$inject = ['$log'];
+  SequoiaTreeFactory.$inject = ['$log'];
 
   angular.module('ngSequoia')
-    .factory('SequoiaTree', SequoiaTree);
+    .factory('SequoiaTree', SequoiaTreeFactory);
 
 })();
