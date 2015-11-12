@@ -107,6 +107,14 @@
       this.nodes = !_.isArray(nodes) ? this.tree : nodes;
     };
 
+    SequoiaTree.prototype.setNodesInPath = function(nodes) {
+      this.nodesInPath = !_.isArray(nodes) ? this.tree : nodes;
+    };
+
+    SequoiaTree.prototype.getNodesInPath = function() {
+      return _.isArray(this.nodesInPath) ? this.nodesInPath : this.tree;
+    };
+
     SequoiaTree.prototype.isValidNode = function(node) {
       return _.isObject(node) && node[this.template.nodes];
     };

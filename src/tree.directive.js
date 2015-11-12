@@ -48,10 +48,11 @@
         scope.toggleSelected = function() {
           if(scope.onlySelected) {
             scope.onlySelected = false;
-            tree.setCurrentNodes();
+            tree.setCurrentNodes(tree.getNodesInPath());
           } else {
             scope.onlySelected = true;
             var selected = tree.findSelected(scope.model);
+            tree.setNodesInPath(tree.nodes);
             tree.setCurrentNodes(selected);
           }
         };
