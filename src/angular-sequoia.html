@@ -1,30 +1,15 @@
 <div class="sequoia" data-ng-show="tree.tree.length">
 
-  <div class="sequoia-search">
-    <div class="sequoia-search-form" data-sequoia-search data-is-searching="searchEnabled" data-tree="tree"></div>
-    <div class="sequoia-actions" data-ng-if="model.length">
-      <ul>
-        <li><a class="sequoia-button sequoia-button-info" href="" data-ng-click="toggleSelected()">{{onlySelected ? 'Hide selected' : 'Show selected'}}</a></li>
-      </ul>
+  <div class="sequoia-modal-container" data-ng-if="modal">
+    <a href="" class="sequoia-button sequoia-button-info" data-ng-click="showModal()" data-ng-bind="model.length ? 'Select (' + model.length + ')' : 'Select'"></a>
+    <div class="sequoia-overlay" data-ng-show="modalShown"></div>
+    <div class="sequoia-modal" data-ng-show="modalShown">
+      <div data-ng-include="'sequoia-tree.html'"></div>
     </div>
   </div>
 
-  <ul data-ng-if="!searchEnabled && !onlySelected" class="sequoia-breadcrumbs" data-ng-include="'sequoia-breadcrumbs.html'"></ul>
+  <div data-ng-if="!modal">
+    <div data-ng-include="'sequoia-tree.html'"></div>
+  </div>
 
-  <ul class="sequoia-tree">
-    <li data-ng-repeat="node in tree.nodes track by node[tree.template.id]">
-      <span class="sequoia-item-title" data-ng-bind="node[tree.template.title]"></span>
-      <span class="sequoia-item-actions">
-        <span data-ng-if="isSelected(node)">
-          <a class="sequoia-button sequoia-button-danger" href="" title="Remove" data-ng-click="remove(node)">Remove</a>
-        </span>
-        <span data-ng-if="!isSelected(node)">
-          <a class="sequoia-button sequoia-button-primary" href="" title="Select" data-ng-click="select(node)">Select</a>
-        </span>
-        <span data-ng-if="node[tree.template.nodes]">
-          <a class="sequoia-button sequoia-button-info" href="" title="Go to subitems" data-ng-click="load(node)">Go to subitems</a>
-        </span>
-      </span>
-    </li>
-  </ul>
 </div>

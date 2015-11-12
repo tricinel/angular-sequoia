@@ -10,7 +10,8 @@
       scope: {
         'treeNodes': '=sequoiaTree',
         'model': '=',
-        'template': '=nodeTemplate'
+        'template': '=nodeTemplate',
+        'modal': '='
       },
       link: function(scope, element, attrs) {
         scope.model = _.isArray(scope.model) ? scope.model : [];
@@ -58,7 +59,18 @@
 
         scope.tree = tree;
 
-        scope.load();
+        scope.showModal = function() {
+          scope.load();
+          scope.modalShown = true;
+        };
+
+        scope.closeModal = function() {
+          scope.modalShown = false;
+        }
+
+        if(!scope.modal) {
+          scope.load();
+        }
       }
     };
 
