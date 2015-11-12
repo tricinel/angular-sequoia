@@ -1,6 +1,6 @@
 (function() {
   'use strict';
 
-  angular.module('ngSequoia', []);
+  angular.module('ngSequoia', ['angular-lodash']);
 
 })();
