@@ -11,7 +11,7 @@
         'tree': '=',
         'isSearching': '='
       },
-      link: function(scope, element, attrs) {
+      link: function(scope) {
         scope.search = function() {
           if(scope.query.length) {
             scope.isSearching = scope.query ? true : false;

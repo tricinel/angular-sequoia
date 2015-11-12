@@ -12,7 +12,7 @@
         'model': '=ngModel',
         'template': '=nodeTemplate'
       },
-      link: function(scope, element, attrs) {
+      link: function(scope) {
         scope.model = _.isArray(scope.model) ? scope.model : [];
         scope.breadcrumbs = [];
 
