@@ -99,6 +99,9 @@
 
       result[template.id] = node[template.id];
       result[template.title] = _buildPath(node, tree, '', template);
+      if(_.isArray(node[template.nodes]) && node[template.nodes].length > 0) {
+        result[template.nodes] = node[template.nodes];
+      }
 
       return result;
     };
