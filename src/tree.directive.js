@@ -19,6 +19,7 @@
         var tree = new Tree(scope.treeNodes, scope.template);
 
         scope.load = function(node) {
+          scope.onlySelected = false;
           if(tree.isValidNode(node)) {
             tree.setCurrentNodes(node[tree.template.nodes]);
             scope.breadcrumbs = tree.breadcrumbs(node[tree.template.id]);
