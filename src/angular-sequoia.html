@@ -21,7 +21,7 @@
         <span data-ng-if="!isSelected(node)">
           <a class="sequoia-button sequoia-button-primary" href="" title="Select" data-ng-click="select(node)">Select</a>
         </span>
-        <span data-ng-if="node[tree.template.nodes]">
+        <span data-ng-if="node[tree.template.nodes] && node[tree.template.nodes].length">
           <a class="sequoia-button sequoia-button-info" href="" title="Go to subitems" data-ng-click="load(node)">Go to subitems</a>
         </span>
       </span>
