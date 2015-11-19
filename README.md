@@ -66,7 +66,7 @@ function MainController() {
 
 ```html
 <div data-ng-controller="MainController as vm">
-  <div data-sequoia-tree="vm.tree" data-model="vm.selectedNodes" data-node-template="vm.template"></div>
+  <div data-sequoia-tree="vm.tree" data-ng-model="vm.selectedNodes" data-node-template="vm.template"></div>
 </div>
 ```
 
