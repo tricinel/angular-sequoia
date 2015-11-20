@@ -87,14 +87,6 @@ function MainController() {
     buttons: {
       edit: 'Edit nodes',
       select: 'Select node'
-    },
-    addNode: function(nodes) {
-      var id = Math.floor((Math.random() * 10000) + 1);
-      nodes.push({
-        _id: id,
-        title: 'Title ' + id,
-        nodes: []
-      });
     }
   };
 
