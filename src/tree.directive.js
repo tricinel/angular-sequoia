@@ -64,6 +64,25 @@
         scope.tree = tree;
 
         scope.load();
+
+        /* Handle adding and editing nodes */
+        scope.toggleEditing = function() {
+          scope.isEditing = !scope.isEditing;
+        };
+
+        scope.addNode = function(node) {
+          if(tree.isValidNode(node)) {
+            scope.load(node);
+          }
+          scope.options.addNode.call(scope,tree.nodes);
+        };
+
+        scope.remove = function(node) {
+          var index = node ? _.indexOf(tree.nodes, node) : -1;
+          if(index !== -1) {
+            tree.nodes.splice(index, 1);
+          }
+        };
       }
     };
 
