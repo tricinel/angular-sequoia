@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  function sequoiaTreeDirective(Tree){
+  function sequoiaTreeDirective(Tree, BUTTONS){
 
     return {
       restrict: 'AE',
@@ -88,7 +88,7 @@
 
   }
 
-  sequoiaTreeDirective.$inject = ['SequoiaTree'];
+  sequoiaTreeDirective.$inject = ['SequoiaTree', 'BUTTONS'];
 
   angular.module('ngSequoia')
     .directive('sequoiaTree', sequoiaTreeDirective);
