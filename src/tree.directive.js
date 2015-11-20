@@ -10,9 +10,12 @@
       scope: {
         'treeNodes': '=sequoiaTree',
         'model': '=ngModel',
-        'template': '=nodeTemplate'
+        'template': '=nodeTemplate',
+        'options': '='
       },
       link: function(scope) {
+        scope.canEdit = scope.options.canEdit ? true : false;
+
         scope.model = _.isArray(scope.model) ? scope.model : [];
         scope.breadcrumbs = [];
 
