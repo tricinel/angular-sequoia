@@ -83,7 +83,9 @@
         /* Handle adding and editing nodes */
         scope.toggleEditing = function() {
           scope.isEditing = !scope.isEditing;
-          scope.allowSelect = !scope.allowSelect;
+          if(scope.isEditing) {
+            scope.allowSelect = false;
+          }
         };
 
         scope.addNode = function(node) {
