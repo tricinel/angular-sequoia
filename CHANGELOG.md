@@ -1,3 +1,14 @@
+###v0.1.6
+___
+
+* Add init function; add buttons texts ([tricinel](http://github.com/tricinel))
+* Add BUTTONS constant ([tricinel](http://github.com/tricinel))
+* Pass buttons to search directive ([tricinel](http://github.com/tricinel))
+* Update nodeTemplate to be used from the constants ([tricinel](http://github.com/tricinel))
+* Add constants (contain buttons and nodeTemplate) ([tricinel](http://github.com/tricinel))
+* Add configurable button text ([tricinel](http://github.com/tricinel))
+* Add angular sanitize as dependency ([tricinel](http://github.com/tricinel))
+
 ###v0.1.5
 ___
 
