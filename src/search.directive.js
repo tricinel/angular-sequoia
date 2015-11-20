@@ -9,7 +9,8 @@
       templateUrl: 'sequoia-search.html',
       scope: {
         'tree': '=',
-        'isSearching': '='
+        'isSearching': '=',
+        'buttons': '='
       },
       link: function(scope) {
         scope.search = function() {

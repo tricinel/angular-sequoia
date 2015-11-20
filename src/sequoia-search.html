@@ -1,4 +1,4 @@
 <form data-ng-submit="search()">
   <input type="text" placeholder="Search for an item by {{tree.template.title}}" data-ng-model="query" name="search" />
-  <a class="sequoia-button sequoia-button-default" href="" data-ng-if="isSearching" data-ng-click="clear()">&times;</a>
+  <a class="sequoia-button sequoia-button-default" href="" data-ng-if="isSearching" data-ng-click="clear()" data-ng-bind-html="buttons.searchClear"></a>
 </form>
