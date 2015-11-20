@@ -2,11 +2,7 @@
 
   <div class="sequoia-search">
     <div class="sequoia-search-form" data-sequoia-search data-is-searching="searchEnabled" data-tree="tree"></div>
-    <div class="sequoia-actions">
-      <ul>
-        <li  data-ng-if="model.length || onlySelected"><a class="sequoia-button sequoia-button-info" href="" data-ng-click="toggleSelected()">{{model.length && !onlySelected ? 'Show selected' : !model.length && onlySelected ? 'Back to list' : 'Hide selected'}}</a></li>
-      </ul>
-    </div>
+    <div class="sequoia-actions" data-ng-include="'sequoia-tree-actions.html'"></div>
   </div>
 
   <ul data-ng-if="!searchEnabled && !onlySelected" class="sequoia-breadcrumbs" data-ng-include="'sequoia-breadcrumbs.html'"></ul>
