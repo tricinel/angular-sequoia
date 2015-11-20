@@ -84,6 +84,10 @@ function MainController() {
 
   vm.treeOptions = {
     canEdit: true,
+    buttons: {
+      edit: 'Edit nodes',
+      select: 'Select node'
+    },
     addNode: function(nodes) {
       var id = Math.floor((Math.random() * 10000) + 1);
       nodes.push({
@@ -96,6 +100,6 @@ function MainController() {
 
 }
 
-var app = angular.module('sequioaDemo', ['ngSequoia']);
+var app = angular.module('sequioaDemo', ['ngSequoia', 'ngSanitize']);
 
 app.controller('MainController', MainController);
