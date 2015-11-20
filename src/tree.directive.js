@@ -33,7 +33,7 @@
         };
 
         scope.select = function(node) {
-          if(node._id) {
+          if(node[tree.template.id]) {
             scope.model.push(node[tree.template.id]);
           }
         };
