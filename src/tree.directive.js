@@ -38,8 +38,8 @@
           }
         };
 
-        scope.remove = function(node) {
-          var index = node._id ? _.indexOf(scope.model,node[tree.template.id]) : -1;
+        scope.deselect = function(node) {
+          var index = node[tree.template.id] ? _.indexOf(scope.model,node[tree.template.id]) : -1;
           if(index !== -1) {
             scope.model.splice(index, 1);
           }
