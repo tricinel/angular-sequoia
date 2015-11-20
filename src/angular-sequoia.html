@@ -13,7 +13,7 @@
       <span class="sequoia-item-title">
         <span data-ng-if="!isEditing" data-ng-bind="node[tree.template.title]"></span>
         <span data-ng-if="isEditing">
-          <input type="text" data-ng-model="node[tree.template.title]">
+          <input type="text" data-ng-model="node[tree.template.title]" placeholder="Enter a {{tree.template.title}}">
         </span>
       </span>
 
