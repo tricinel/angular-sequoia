@@ -15,14 +15,12 @@
       },
       link: function(scope) {
         function init() {
+          scope.options = scope.options ? scope.options : {canEdit: false, buttons: {}};
           scope.canEdit = scope.options.canEdit ? true : false;
-
           scope.allowSelect = scope.model ? true : false;
           scope.model = _.isArray(scope.model) ? scope.model : [];
           scope.breadcrumbs = [];
-
           scope.tree = new Tree(scope.treeNodes, scope.template);
-
           scope.buttons = {
             edit: scope.options.buttons.edit ? scope.options.buttons.edit : BUTTONS.edit,
             select: scope.options.buttons.select ? scope.options.buttons.select : BUTTONS.select,
