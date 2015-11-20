@@ -7,10 +7,14 @@
 
     var SequoiaTree = function(tree, template) {
       this.template = template || NODE_TEMPLATE;
-      this.tree = _checkNodeStructure(_.isArray(tree) ? tree[0] : [], this.template) ? tree : [];
+      this.tree = _checkNodeStructure(_.isArray(tree) ? tree[0] : {}, this.template) ? tree : [];
     };
 
     _checkNodeStructure = function(node, template) {
+      if(!node) {
+        return false;
+      }
+
       var keys = _.values(template);
       for(var i=0;i<keys.length;i++) {
         if (!_.has(node, keys[i])) {
