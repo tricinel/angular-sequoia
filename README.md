@@ -64,6 +64,9 @@ function MainController() {
 
   vm.treeOptions = {
     canEdit: true,
+    buttons:  {
+      done: 'Complete'
+    },
     addNode: function(nodes) {
       var id = Math.floor((Math.random() * 10000) + 1);
       nodes.push({
@@ -82,7 +85,7 @@ function MainController() {
 </div>
 ```
 
-You can ignore the `vm.template` as long as your nodes conform to the _id, nodes, title template. Otherwise, just pass it through.
+You can ignore the `vm.template` as long as your nodes conform to the default template (which you can find here: [default template](./src/sequoia.constants.js)). Otherwise, just pass it through.
 
 ```javascript
 vm.template = {
@@ -93,6 +96,8 @@ vm.template = {
 ```
 
 By `passing canEdit = true` via `vm.treeOptions` you are basically turning your tree visualiser into a tree editor. You can add new nodes or remove and edit existing nodes.
+
+You can configure all the button texts and even pass in icons for buttons. You don't need to configure all, just the ones that you need. You can find the default buttons here: [default buttons](./src/sequoia.constants.js)
 
 ##### Coming next
 
