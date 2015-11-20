@@ -1,18 +1,12 @@
 (function() {
   'use strict';
 
-  function SequoiaTreeFactory($log) {
+  function SequoiaTreeFactory($log, NODE_TEMPLATE) {
 
     var _checkNodeStructure, _exists, _contains, _buildBreadCrumbs, _buildPath, _selected, _createNodeWithFullPathAsTitle;
 
     var SequoiaTree = function(tree, template) {
-      var nodeTemplate = {
-        id: '_id',
-        nodes: 'nodes',
-        title: 'title'
-      };
-
-      this.template = template || nodeTemplate;
+      this.template = template || NODE_TEMPLATE;
       this.tree = _checkNodeStructure(_.isArray(tree) ? tree[0] : [], this.template) ? tree : [];
     };
 
@@ -158,7 +152,7 @@
     return SequoiaTree;
   }
 
-  SequoiaTreeFactory.$inject = ['$log'];
+  SequoiaTreeFactory.$inject = ['$log', 'NODE_TEMPLATE'];
 
   angular.module('ngSequoia')
     .factory('SequoiaTree', SequoiaTreeFactory);
