@@ -1,3 +1,10 @@
+###v0.1.8
+___
+
+* Move addNode function to directive ([tricinel](http://github.com/tricinel))
+* Add placeholder in edit mode ([tricinel](http://github.com/tricinel))
+* Fix bug that would show the select buttons when clicking edit even if allowSelect is false ([tricinel](http://github.com/tricinel))
+
 ###v0.1.6
 ___
 
