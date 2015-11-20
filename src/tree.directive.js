@@ -14,55 +14,73 @@
         'options': '='
       },
       link: function(scope) {
-        scope.canEdit = scope.options.canEdit ? true : false;
+        function init() {
+          scope.canEdit = scope.options.canEdit ? true : false;
 
-        scope.model = _.isArray(scope.model) ? scope.model : [];
-        scope.breadcrumbs = [];
+          scope.model = _.isArray(scope.model) ? scope.model : [];
+          scope.breadcrumbs = [];
 
-        var tree = new Tree(scope.treeNodes, scope.template);
+          scope.tree = new Tree(scope.treeNodes, scope.template);
+
+          scope.buttons = {
+            edit: scope.options.buttons.edit ? scope.options.buttons.edit : BUTTONS.edit,
+            select: scope.options.buttons.select ? scope.options.buttons.select : BUTTONS.select,
+            deselect: scope.options.buttons.deselect ? scope.options.buttons.deselect : BUTTONS.deselect,
+            goToSubitems: scope.options.buttons.goToSubitems ? scope.options.buttons.goToSubitems : BUTTONS.goToSubitems,
+            addSubitems: scope.options.buttons.addSubitems ? scope.options.buttons.addSubitems : BUTTONS.addSubitems,
+            addNode: scope.options.buttons.addNode ? scope.options.buttons.addNode : BUTTONS.addNode,
+            remove: scope.options.buttons.remove ? scope.options.buttons.remove : BUTTONS.remove,
+            done: scope.options.buttons.done ? scope.options.buttons.done : BUTTONS.done,
+            searchClear: scope.options.buttons.searchClear ? scope.options.buttons.searchClear : BUTTONS.searchClear,
+            showSelected: scope.options.buttons.showSelected ? scope.options.buttons.showSelected : BUTTONS.showSelected,
+            hideSelected: scope.options.buttons.hideSelected ? scope.options.buttons.hideSelected : BUTTONS.hideSelected,
+            backToList: scope.options.buttons.backToList ? scope.options.buttons.backToList : BUTTONS.backToList
+          };
+
+          console.log(scope.buttons);
+        }
 
         scope.load = function(node) {
           scope.onlySelected = false;
-          if(tree.isValidNode(node)) {
-            tree.setCurrentNodes(node[tree.template.nodes]);
-            scope.breadcrumbs = tree.breadcrumbs(node[tree.template.id]);
+          if(scope.tree.isValidNode(node)) {
+            scope.tree.setCurrentNodes(node[scope.tree.template.nodes]);
+            scope.breadcrumbs = scope.tree.breadcrumbs(node[scope.tree.template.id]);
           } else {
-            tree.setCurrentNodes();
+            scope.tree.setCurrentNodes();
             scope.breadcrumbs = [];
           }
         };
 
         scope.select = function(node) {
-          if(node[tree.template.id]) {
-            scope.model.push(node[tree.template.id]);
+          if(node[scope.tree.template.id]) {
+            scope.model.push(node[scope.tree.template.id]);
           }
         };
 
         scope.deselect = function(node) {
-          var index = node[tree.template.id] ? _.indexOf(scope.model,node[tree.template.id]) : -1;
+          var index = node[scope.tree.template.id] ? _.indexOf(scope.model,node[scope.tree.template.id]) : -1;
           if(index !== -1) {
             scope.model.splice(index, 1);
           }
         };
 
         scope.isSelected = function(node) {
-          return _.indexOf(scope.model, node[tree.template.id]) !== -1 ? true : false;
+          return _.indexOf(scope.model, node[scope.tree.template.id]) !== -1 ? true : false;
         };
 
         scope.toggleSelected = function() {
           if(scope.onlySelected) {
             scope.onlySelected = false;
-            tree.setCurrentNodes(tree.getNodesInPath());
+            scope.tree.setCurrentNodes(scope.tree.getNodesInPath());
           } else {
             scope.onlySelected = true;
-            var selected = tree.findSelected(scope.model);
-            tree.setNodesInPath(tree.nodes);
-            tree.setCurrentNodes(selected);
+            var selected = scope.tree.findSelected(scope.model);
+            scope.tree.setNodesInPath(scope.tree.nodes);
+            scope.tree.setCurrentNodes(selected);
           }
         };
 
-        scope.tree = tree;
-
+        init();
         scope.load();
 
         /* Handle adding and editing nodes */
@@ -71,16 +89,16 @@
         };
 
         scope.addNode = function(node) {
-          if(tree.isValidNode(node)) {
+          if(scope.tree.isValidNode(node)) {
             scope.load(node);
           }
-          scope.options.addNode.call(scope,tree.nodes);
+          scope.options.addNode.call(scope,scope.tree.nodes);
         };
 
         scope.remove = function(node) {
-          var index = node ? _.indexOf(tree.nodes, node) : -1;
+          var index = node ? _.indexOf(scope.tree.nodes, node) : -1;
           if(index !== -1) {
-            tree.nodes.splice(index, 1);
+            scope.tree.nodes.splice(index, 1);
           }
         };
       }
