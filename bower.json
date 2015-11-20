@@ -45,9 +45,11 @@
   },
   "dependencies": {
     "lodash": "~3.10.1",
-    "angular-lodash": "~0.1.2"
+    "angular-lodash": "~0.1.2",
+    "angular-sanitize": "~1.4.8"
   },
   "resolutions": {
-    "lodash": "~3.10.1"
+    "lodash": "~3.10.1",
+    "angular": ">=1.3.0"
   }
 }
