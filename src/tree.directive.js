@@ -36,8 +36,6 @@
             hideSelected: scope.options.buttons.hideSelected ? scope.options.buttons.hideSelected : BUTTONS.hideSelected,
             backToList: scope.options.buttons.backToList ? scope.options.buttons.backToList : BUTTONS.backToList
           };
-
-          console.log(scope.buttons);
         }
 
         scope.load = function(node) {
