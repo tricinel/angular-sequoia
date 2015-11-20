@@ -16,17 +16,21 @@ describe('Sequoia Tree Factory', function() {
   beforeEach(module('ngSequoia'));
 
   var SequoiaTree,
-      log;
+      log,
+      NODE_TEMPLATE;
 
-  beforeEach(inject(function(_SequoiaTree_, _$log_){
+  beforeEach(inject(function(_SequoiaTree_, _$log_, _NODE_TEMPLATE_){
     SequoiaTree = _SequoiaTree_;
     log = _$log_;
+    NODE_TEMPLATE = _NODE_TEMPLATE_;
   }));
 
   it('should create a new tree', function() {
-    var tree = new SequoiaTree(nodes,template);
+    var tree1 = new SequoiaTree(nodes,template),
+        tree2 = new SequoiaTree(nodes);
 
-    expect(tree).toBeDefined();
+    expect(tree1).toBeDefined(); //passing a template
+    expect(tree2).toBeDefined(); //create a tree with the default template
   });
 
   it('should validate the node template', function() {
@@ -99,6 +103,13 @@ describe('Sequoia Tree Factory', function() {
 
     expect(found.length).toBe(0);
     expect(log.warn.logs).toContain(['You must pass an array of IDs in order to find the selected nodes!']);
+  });
+
+  it('should create a new empty node', function() {
+    var tree = new SequoiaTree(nodes,template),
+        node = tree.newNode();
+
+    expect(node).toEqual({_id: node._id, title: '', nodes: []});
   });
 
 });

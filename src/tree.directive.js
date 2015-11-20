@@ -92,8 +92,11 @@
           if(scope.tree.isValidNode(node)) {
             scope.load(node);
           }
-          scope.options.addNode.call(scope,scope.tree.nodes);
+
+          scope.tree.nodes.push(scope.tree.newNode());
+          scope.treeNodes = angular.copy(scope.tree.tree);
           scope.allowSelect = false;
+          scope.isEditing = true;
         };
 
         scope.remove = function(node) {

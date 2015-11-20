@@ -3,11 +3,18 @@
 
   function SequoiaTreeFactory($log, NODE_TEMPLATE) {
 
-    var _checkNodeStructure, _exists, _contains, _buildBreadCrumbs, _buildPath, _selected, _createNodeWithFullPathAsTitle;
+    var _checkNodeStructure, _exists, _contains, _buildBreadCrumbs, _buildPath, _selected, _createNodeWithFullPathAsTitle, _guid;
 
     var SequoiaTree = function(tree, template) {
       this.template = template || NODE_TEMPLATE;
       this.tree = _checkNodeStructure(_.isArray(tree) ? tree[0] : {}, this.template) ? tree : [];
+    };
+
+    _guid = function() {
+      // https://gist.github.com/jed/982883
+      var b = function(a) {return a ? (a ^ Math.random() * 16 >> a / 4).toString(16) : ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, b);};
+
+      return b();
     };
 
     _checkNodeStructure = function(node, template) {
@@ -151,6 +158,16 @@
       }
 
       return results;
+    };
+
+    SequoiaTree.prototype.newNode = function() {
+      var node = {};
+
+      node[this.template.id] = _guid();
+      node[this.template.title] = '';
+      node[this.template.nodes] = [];
+
+      return node;
     };
 
     return SequoiaTree;
