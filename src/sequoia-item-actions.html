@@ -1,0 +1,19 @@
+<span data-ng-if="isSelected(node) && !isEditing">
+  <a class="sequoia-button sequoia-button-danger" href="" title="Deselet" data-ng-click="deselect(node)">Deselet</a>
+</span>
+
+<span data-ng-if="!isSelected(node) && !isEditing">
+  <a class="sequoia-button sequoia-button-primary" href="" title="Select" data-ng-click="select(node)">Select</a>
+</span>
+
+<span data-ng-if="isEditing">
+  <a class="sequoia-button sequoia-button-danger" href="" title="Deselet" data-ng-click="remove(node)">Delete</a>
+</span>
+
+<span data-ng-if="node[tree.template.nodes] && node[tree.template.nodes].length">
+  <a class="sequoia-button sequoia-button-info" href="" title="Go to subitems" data-ng-click="load(node)">Go to subitems</a>
+</span>
+
+<span data-ng-if="isEditing && (!node[tree.template.nodes] || !node[tree.template.nodes].length)">
+  <a class="sequoia-button sequoia-button-info" href="" title="Add subitems" data-ng-click="addNode(node)">Add subitems</a>
+</span>

@@ -9,18 +9,15 @@
 
   <ul class="sequoia-tree">
     <li data-ng-repeat="node in tree.nodes track by node[tree.template.id]">
-      <span class="sequoia-item-title" data-ng-bind="node[tree.template.title]"></span>
-      <span class="sequoia-item-actions">
-        <span data-ng-if="isSelected(node)">
-          <a class="sequoia-button sequoia-button-danger" href="" title="Remove" data-ng-click="remove(node)">Remove</a>
-        </span>
-        <span data-ng-if="!isSelected(node)">
-          <a class="sequoia-button sequoia-button-primary" href="" title="Select" data-ng-click="select(node)">Select</a>
-        </span>
-        <span data-ng-if="node[tree.template.nodes] && node[tree.template.nodes].length">
-          <a class="sequoia-button sequoia-button-info" href="" title="Go to subitems" data-ng-click="load(node)">Go to subitems</a>
+
+      <span class="sequoia-item-title">
+        <span data-ng-if="!isEditing" data-ng-bind="node[tree.template.title]"></span>
+        <span data-ng-if="isEditing">
+          <input type="text" data-ng-model="node[tree.template.title]">
         </span>
       </span>
+
+      <span class="sequoia-item-actions" data-ng-include="'sequoia-item-actions.html'"></span>
     </li>
   </ul>
 </div>
