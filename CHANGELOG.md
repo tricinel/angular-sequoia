@@ -1,3 +1,18 @@
+###v0.1.5
+___
+
+* Add minor fixes for responsiveness ([tricinel](http://github.com/tricinel))
+* Move input[text] styles outside of search so that they can apply to node editing as well ([tricinel](http://github.com/tricinel))
+* Update Readme to include instructions for adding nodes and tree options ([tricinel](http://github.com/tricinel))
+* Update demo for adding/editing/removing of nodes ([tricinel](http://github.com/tricinel))
+* Add handling of adding, removing and editing nodes ([tricinel](http://github.com/tricinel))
+* Rename remove to deselect ([tricinel](http://github.com/tricinel))
+* Fix hardcoded _id - template.id instead of _id ([tricinel](http://github.com/tricinel))
+* Add tree options to scope ([tricinel](http://github.com/tricinel))
+* Fix returning to current nodes when clearing searching ([tricinel](http://github.com/tricinel))
+* Separate sequoia item actions into its own template ([tricinel](http://github.com/tricinel))
+* Separate sequoia tree actions into its own template ([tricinel](http://github.com/tricinel))
+
 ###v0.1.4
 ___
 
