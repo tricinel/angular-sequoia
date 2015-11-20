@@ -22,6 +22,7 @@
         scope.search = function() {
           if(scope.query.length) {
             scope.isSearching = scope.query ? true : false;
+            scope.tree.setNodesInPath(scope.tree.nodes);
             scope.tree.setCurrentNodes(scope.tree.find(scope.tree.template.title, scope.query));
           } else {
             scope.clear();
@@ -31,7 +32,7 @@
         scope.clear = function() {
           scope.query = '';
           scope.isSearching = false;
-          scope.tree.setCurrentNodes();
+          scope.tree.setCurrentNodes(scope.tree.getNodesInPath());
         };
       }
     };
@@ -54,9 +55,12 @@
       scope: {
         'treeNodes': '=sequoiaTree',
         'model': '=ngModel',
-        'template': '=nodeTemplate'
+        'template': '=nodeTemplate',
+        'options': '='
       },
       link: function(scope) {
+        scope.canEdit = scope.options.canEdit ? true : false;
+
         scope.model = _.isArray(scope.model) ? scope.model : [];
         scope.breadcrumbs = [];
 
@@ -74,13 +78,13 @@
         };
 
         scope.select = function(node) {
-          if(node._id) {
+          if(node[tree.template.id]) {
             scope.model.push(node[tree.template.id]);
           }
         };
 
-        scope.remove = function(node) {
-          var index = node._id ? _.indexOf(scope.model,node[tree.template.id]) : -1;
+        scope.deselect = function(node) {
+          var index = node[tree.template.id] ? _.indexOf(scope.model,node[tree.template.id]) : -1;
           if(index !== -1) {
             scope.model.splice(index, 1);
           }
@@ -105,6 +109,25 @@
         scope.tree = tree;
 
         scope.load();
+
+        /* Handle adding and editing nodes */
+        scope.toggleEditing = function() {
+          scope.isEditing = !scope.isEditing;
+        };
+
+        scope.addNode = function(node) {
+          if(tree.isValidNode(node)) {
+            scope.load(node);
+          }
+          scope.options.addNode.call(scope,tree.nodes);
+        };
+
+        scope.remove = function(node) {
+          var index = node ? _.indexOf(tree.nodes, node) : -1;
+          if(index !== -1) {
+            tree.nodes.splice(index, 1);
+          }
+        };
       }
     };
 
@@ -283,6 +306,8 @@
 
 })();
 
-angular.module("ngSequoia").run(["$templateCache", function($templateCache) {$templateCache.put("angular-sequoia.html","<div class=\"sequoia\" data-ng-show=\"tree.tree.length\">\n\n  <div class=\"sequoia-search\">\n    <div class=\"sequoia-search-form\" data-sequoia-search data-is-searching=\"searchEnabled\" data-tree=\"tree\"></div>\n    <div class=\"sequoia-actions\">\n      <ul>\n        <li  data-ng-if=\"model.length || onlySelected\"><a class=\"sequoia-button sequoia-button-info\" href=\"\" data-ng-click=\"toggleSelected()\">{{model.length && !onlySelected ? \'Show selected\' : !model.length && onlySelected ? \'Back to list\' : \'Hide selected\'}}</a></li>\n      </ul>\n    </div>\n  </div>\n\n  <ul data-ng-if=\"!searchEnabled && !onlySelected\" class=\"sequoia-breadcrumbs\" data-ng-include=\"\'sequoia-breadcrumbs.html\'\"></ul>\n\n  <ul class=\"sequoia-tree\">\n    <li data-ng-repeat=\"node in tree.nodes track by node[tree.template.id]\">\n      <span class=\"sequoia-item-title\" data-ng-bind=\"node[tree.template.title]\"></span>\n      <span class=\"sequoia-item-actions\">\n        <span data-ng-if=\"isSelected(node)\">\n          <a class=\"sequoia-button sequoia-button-danger\" href=\"\" title=\"Remove\" data-ng-click=\"remove(node)\">Remove</a>\n        </span>\n        <span data-ng-if=\"!isSelected(node)\">\n          <a class=\"sequoia-button sequoia-button-primary\" href=\"\" title=\"Select\" data-ng-click=\"select(node)\">Select</a>\n        </span>\n        <span data-ng-if=\"node[tree.template.nodes] && node[tree.template.nodes].length\">\n          <a class=\"sequoia-button sequoia-button-info\" href=\"\" title=\"Go to subitems\" data-ng-click=\"load(node)\">Go to subitems</a>\n        </span>\n      </span>\n    </li>\n  </ul>\n</div>\n");
+angular.module("ngSequoia").run(["$templateCache", function($templateCache) {$templateCache.put("angular-sequoia.html","<div class=\"sequoia\" data-ng-show=\"tree.tree.length\">\n\n  <div class=\"sequoia-search\">\n    <div class=\"sequoia-search-form\" data-sequoia-search data-is-searching=\"searchEnabled\" data-tree=\"tree\"></div>\n    <div class=\"sequoia-actions\" data-ng-include=\"\'sequoia-tree-actions.html\'\"></div>\n  </div>\n\n  <ul data-ng-if=\"!searchEnabled && !onlySelected\" class=\"sequoia-breadcrumbs\" data-ng-include=\"\'sequoia-breadcrumbs.html\'\"></ul>\n\n  <ul class=\"sequoia-tree\">\n    <li data-ng-repeat=\"node in tree.nodes track by node[tree.template.id]\">\n\n      <span class=\"sequoia-item-title\">\n        <span data-ng-if=\"!isEditing\" data-ng-bind=\"node[tree.template.title]\"></span>\n        <span data-ng-if=\"isEditing\">\n          <input type=\"text\" data-ng-model=\"node[tree.template.title]\">\n        </span>\n      </span>\n\n      <span class=\"sequoia-item-actions\" data-ng-include=\"\'sequoia-item-actions.html\'\"></span>\n    </li>\n  </ul>\n</div>\n");
 $templateCache.put("sequoia-breadcrumbs.html","<li data-ng-if=\"breadcrumbs.length\" data-ng-repeat=\"link in breadcrumbs\" data-ng-class=\"$last ? \'last\' : \'\'\" data-ng-init=\"title = link[tree.template.title].length > 23 ? (link[tree.template.title] | limitTo:20) + \'&hellip;\' : link[tree.template.title]\">\n  <a data-ng-if=\"!$last\" href=\"\" data-ng-click=\"load(link)\" data-ng-bind=\"title\"></a>\n  <span data-ng-if=\"$last\" data-ng-bind=\"title\"></span>\n</li>");
-$templateCache.put("sequoia-search.html","<form data-ng-submit=\"search()\">\n  <input type=\"text\" placeholder=\"Search for an item by {{tree.template.title}}\" data-ng-model=\"query\" name=\"search\" />\n  <a class=\"sequoia-button sequoia-button-default\" href=\"\" data-ng-if=\"isSearching\" data-ng-click=\"clear()\">&times;</a>\n</form>\n");}]);
+$templateCache.put("sequoia-item-actions.html","<span data-ng-if=\"isSelected(node) && !isEditing\">\n  <a class=\"sequoia-button sequoia-button-danger\" href=\"\" title=\"Deselet\" data-ng-click=\"deselect(node)\">Deselet</a>\n</span>\n\n<span data-ng-if=\"!isSelected(node) && !isEditing\">\n  <a class=\"sequoia-button sequoia-button-primary\" href=\"\" title=\"Select\" data-ng-click=\"select(node)\">Select</a>\n</span>\n\n<span data-ng-if=\"isEditing\">\n  <a class=\"sequoia-button sequoia-button-danger\" href=\"\" title=\"Deselet\" data-ng-click=\"remove(node)\">Delete</a>\n</span>\n\n<span data-ng-if=\"node[tree.template.nodes] && node[tree.template.nodes].length\">\n  <a class=\"sequoia-button sequoia-button-info\" href=\"\" title=\"Go to subitems\" data-ng-click=\"load(node)\">Go to subitems</a>\n</span>\n\n<span data-ng-if=\"isEditing && (!node[tree.template.nodes] || !node[tree.template.nodes].length)\">\n  <a class=\"sequoia-button sequoia-button-info\" href=\"\" title=\"Add subitems\" data-ng-click=\"addNode(node)\">Add subitems</a>\n</span>");
+$templateCache.put("sequoia-search.html","<form data-ng-submit=\"search()\">\n  <input type=\"text\" placeholder=\"Search for an item by {{tree.template.title}}\" data-ng-model=\"query\" name=\"search\" />\n  <a class=\"sequoia-button sequoia-button-default\" href=\"\" data-ng-if=\"isSearching\" data-ng-click=\"clear()\">&times;</a>\n</form>\n");
+$templateCache.put("sequoia-tree-actions.html","<ul>\n\n  <li data-ng-if=\"(model.length || onlySelected) && !isEditing\">\n    <a class=\"sequoia-button sequoia-button-info\" href=\"\" data-ng-click=\"toggleSelected()\">{{model.length && !onlySelected ? \'Show selected\' : !model.length && onlySelected ? \'Back to list\' : \'Hide selected\'}}</a>\n  </li>\n\n  <li data-ng-if=\"isEditing\">\n    <a class=\"sequoia-button sequoia-button-success\" href=\"\" data-ng-click=\"addNode()\">Add node</a>\n  </li>\n\n  <li data-ng-if=\"canEdit\">\n    <a class=\"sequoia-button sequoia-button-info\" href=\"\" data-ng-click=\"toggleEditing()\">{{isEditing ? \'Done\' : \'Edit\'}}</a>\n  </li>\n\n</ul>\n");}]);
