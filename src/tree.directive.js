@@ -17,6 +17,7 @@
         function init() {
           scope.canEdit = scope.options.canEdit ? true : false;
 
+          scope.allowSelect = scope.model ? true : false;
           scope.model = _.isArray(scope.model) ? scope.model : [];
           scope.breadcrumbs = [];
 
@@ -84,6 +85,7 @@
         /* Handle adding and editing nodes */
         scope.toggleEditing = function() {
           scope.isEditing = !scope.isEditing;
+          scope.allowSelect = !scope.allowSelect;
         };
 
         scope.addNode = function(node) {
@@ -91,6 +93,7 @@
             scope.load(node);
           }
           scope.options.addNode.call(scope,scope.tree.nodes);
+          scope.allowSelect = false;
         };
 
         scope.remove = function(node) {
