@@ -15,6 +15,7 @@
         scope.search = function() {
           if(scope.query.length) {
             scope.isSearching = scope.query ? true : false;
+            scope.tree.setNodesInPath(scope.tree.nodes);
             scope.tree.setCurrentNodes(scope.tree.find(scope.tree.template.title, scope.query));
           } else {
             scope.clear();
@@ -24,7 +25,7 @@
         scope.clear = function() {
           scope.query = '';
           scope.isSearching = false;
-          scope.tree.setCurrentNodes();
+          scope.tree.setCurrentNodes(scope.tree.getNodesInPath());
         };
       }
     };

@@ -1,0 +1,15 @@
+<ul>
+
+  <li data-ng-if="(model.length || onlySelected) && !isEditing">
+    <a class="sequoia-button sequoia-button-info" href="" data-ng-click="toggleSelected()">{{model.length && !onlySelected ? 'Show selected' : !model.length && onlySelected ? 'Back to list' : 'Hide selected'}}</a>
+  </li>
+
+  <li data-ng-if="isEditing">
+    <a class="sequoia-button sequoia-button-success" href="" data-ng-click="addNode()">Add node</a>
+  </li>
+
+  <li data-ng-if="canEdit">
+    <a class="sequoia-button sequoia-button-info" href="" data-ng-click="toggleEditing()">{{isEditing ? 'Done' : 'Edit'}}</a>
+  </li>
+
+</ul>

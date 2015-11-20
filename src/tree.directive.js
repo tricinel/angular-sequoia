@@ -10,9 +10,12 @@
       scope: {
         'treeNodes': '=sequoiaTree',
         'model': '=ngModel',
-        'template': '=nodeTemplate'
+        'template': '=nodeTemplate',
+        'options': '='
       },
       link: function(scope) {
+        scope.canEdit = scope.options.canEdit ? true : false;
+
         scope.model = _.isArray(scope.model) ? scope.model : [];
         scope.breadcrumbs = [];
 
@@ -30,13 +33,13 @@
         };
 
         scope.select = function(node) {
-          if(node._id) {
+          if(node[tree.template.id]) {
             scope.model.push(node[tree.template.id]);
           }
         };
 
-        scope.remove = function(node) {
-          var index = node._id ? _.indexOf(scope.model,node[tree.template.id]) : -1;
+        scope.deselect = function(node) {
+          var index = node[tree.template.id] ? _.indexOf(scope.model,node[tree.template.id]) : -1;
           if(index !== -1) {
             scope.model.splice(index, 1);
           }
@@ -61,6 +64,25 @@
         scope.tree = tree;
 
         scope.load();
+
+        /* Handle adding and editing nodes */
+        scope.toggleEditing = function() {
+          scope.isEditing = !scope.isEditing;
+        };
+
+        scope.addNode = function(node) {
+          if(tree.isValidNode(node)) {
+            scope.load(node);
+          }
+          scope.options.addNode.call(scope,tree.nodes);
+        };
+
+        scope.remove = function(node) {
+          var index = node ? _.indexOf(tree.nodes, node) : -1;
+          if(index !== -1) {
+            tree.nodes.splice(index, 1);
+          }
+        };
       }
     };
 

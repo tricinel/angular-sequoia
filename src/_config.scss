@@ -9,6 +9,8 @@ $sequoia-gray: #7f8c8d;
 
 $border-radius: 4px;
 
+$screen-sm: 786px;
+
 /* Mixins */
 @mixin clearfix() {
   &:before,

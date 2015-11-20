@@ -61,12 +61,24 @@ function MainController() {
       ]
     }
   ];
+
+  vm.treeOptions = {
+    canEdit: true,
+    addNode: function(nodes) {
+      var id = Math.floor((Math.random() * 10000) + 1);
+      nodes.push({
+        _id: id,
+        title: 'Title ' + id,
+        nodes: []
+      });
+    }
+  };
 }
 ```
 
 ```html
 <div data-ng-controller="MainController as vm">
-  <div data-sequoia-tree="vm.tree" data-ng-model="vm.selectedNodes" data-node-template="vm.template"></div>
+  <div data-sequoia-tree="vm.tree" data-ng-model="vm.selectedNodes" data-node-template="vm.template" data-options="vm.treeOptions"></div>
 </div>
 ```
 
@@ -80,11 +92,13 @@ vm.template = {
 };
 ```
 
+By `passing canEdit = true` via `vm.treeOptions` you are basically turning your tree visualiser into a tree editor. You can add new nodes or remove and edit existing nodes.
+
 ##### Coming next
 
 * Better visualiser for long titles
-* Add new nodes on the fly to the tree/subtree
-* Remove nodes on the fly from the tree/subtree
+* Drag and drop support when in edit mode
+* Infinite scroll for the nodes on any level
 
 ##### License
 
