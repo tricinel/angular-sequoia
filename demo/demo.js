@@ -81,6 +81,19 @@ function MainController() {
       ]
     }
   ];
+
+  vm.treeOptions = {
+    canEdit: true,
+    addNode: function(nodes) {
+      var id = Math.floor((Math.random() * 10000) + 1);
+      nodes.push({
+        _id: id,
+        title: 'Title ' + id,
+        nodes: []
+      });
+    }
+  };
+
 }
 
 var app = angular.module('sequioaDemo', ['ngSequoia']);

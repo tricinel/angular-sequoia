@@ -18,7 +18,7 @@
   <div data-ng-controller="MainController as vm">
     <pre>{{ vm.selectedNodes | json }}</pre>
 
-    <div data-sequoia-tree="vm.tree" data-ng-model="vm.selectedNodes"></div>
+    <div data-sequoia-tree="vm.tree" data-ng-model="vm.selectedNodes" data-node-template="vm.template" data-options="vm.treeOptions"></div>
   </div>
 
   <script src="../bower_components/angular/angular.js"></script>
