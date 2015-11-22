@@ -137,4 +137,14 @@
     width: 90%;
   }
 
+  .help-text {
+    font-size: 11px;
+    color: $sequoia-gray;
+    margin: 5px 0px;
+
+    &.has-error {
+      color: $sequoia-danger;
+    }
+  }
+
 }
