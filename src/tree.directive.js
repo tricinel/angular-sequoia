@@ -81,7 +81,15 @@
         scope.load();
 
         /* Handle adding and editing nodes */
-        scope.toggleEditing = function() {
+        scope.toggleEditing = function(form) {
+          //handle form validation
+          if(scope.isEditing) {
+            form.isSubmitted = true;
+          }
+          if(form && !form.$valid) {
+            return;
+          }
+
           scope.isEditing = !scope.isEditing;
           if(scope.isEditing) {
             scope.allowSelect = false;
