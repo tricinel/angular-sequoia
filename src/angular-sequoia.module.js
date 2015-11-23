@@ -1,6 +1,6 @@
 (function() {
   'use strict';
 
-  angular.module('ngSequoia', ['angular-lodash']);
+  angular.module('ngSequoia', ['angular-lodash', 'as.sortable']);
 
 })();
