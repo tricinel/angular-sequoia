@@ -15,7 +15,8 @@
       },
       link: function(scope) {
         function init() {
-          scope.options = scope.options ? scope.options : {canEdit: false, buttons: {}};
+          /* Set the default options*/
+          scope.options = _.defaults(scope.options, {canEdit: false, buttons: {}});
           scope.canEdit = scope.options.canEdit ? true : false;
           scope.allowSelect = scope.model ? true : false;
           scope.model = _.isArray(scope.model) ? scope.model : [];
