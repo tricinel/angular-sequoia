@@ -1,0 +1,10 @@
+<span class="sequoia-item-title">
+  <span data-ng-if="!isEditing" data-ng-bind="node[tree.template.title]"></span>
+  <span data-ng-if="isEditing">
+    <input required name="itemTitle_{{node[tree.template.id]}}" type="text" data-ng-model="node[tree.template.title]" placeholder="Enter a {{tree.template.title}}">
+    <p class="help-text has-error" data-ng-show="form.isSubmitted && form['itemTitle_' + node[tree.template.id]].$error.required">The item {{tree.template.title}} is required!</p>
+  </span>
+</span>
+
+<span class="sequoia-item-actions" data-ng-include="'sequoia-item-actions.html'" data-ng-if="!isEditing"></span>
+<span class="sequoia-item-actions" data-ng-include="'sequoia-item-edit-actions.html'" data-ng-if="isEditing"></span>

@@ -1,0 +1,15 @@
+<span>
+  <a class="sequoia-button sequoia-button-danger" href="" title="Remove" data-ng-click="remove(node)" data-ng-bind-html="buttons.remove"></a>
+</span>
+
+<span data-ng-if="node[tree.template.nodes] && node[tree.template.nodes].length">
+  <a class="sequoia-button sequoia-button-info" href="" title="Go to subitems" data-ng-click="load(node)" data-ng-bind-html="buttons.goToSubitems"></a>
+</span>
+
+<span data-ng-if="!node[tree.template.nodes] || !node[tree.template.nodes].length">
+  <a class="sequoia-button sequoia-button-info" href="" title="Add subitems" data-ng-click="addNode(node)" data-ng-bind-html="buttons.addSubitems"></a>
+</span>
+
+<span data-as-sortable-item-handle>
+  <a class="sequoia-button sequoia-button-default" href="">Move</a>
+</span>
