@@ -1,3 +1,13 @@
+###v0.1.9
+___
+
+* Separated the item views into edit and non-edit; add ng-sortable ([tricinel](http://github.com/tricinel))
+* Fix empty options object ([tricinel](http://github.com/tricinel))
+* Add ng-sortable for drag and drop sorting when editing ([tricinel](http://github.com/tricinel))
+* Style the help text and error notifications for validations for inputs ([tricinel](http://github.com/tricinel))
+* Add form and form validation when editing the nodes ([tricinel](http://github.com/tricinel))
+* Fix data-ng-bind-htmls ([tricinel](http://github.com/tricinel))
+
 ###v0.1.8
 ___
 
