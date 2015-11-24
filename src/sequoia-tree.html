@@ -1,4 +1,4 @@
-<form name="form" novalidate>
+<ng-form name="sequoiaEditForm" novalidate>
 
   <div class="sequoia-search">
     <div class="sequoia-search-form" data-sequoia-search data-is-searching="searchEnabled" data-tree="tree" data-buttons="buttons"></div>
@@ -16,4 +16,4 @@
     <li data-ng-repeat="node in tree.nodes track by node[tree.template.id]" data-ng-include="'sequoia-item.html'"></li>
   </ul>
 
-</form>
+</ng-form>

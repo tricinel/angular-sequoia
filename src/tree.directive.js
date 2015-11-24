@@ -97,6 +97,7 @@
 
         /* Handle adding and editing nodes */
         scope.toggleEditing = function(form) {
+          console.log(form);
           //handle form validation
           if(scope.isEditing) {
             form.isSubmitted = true;
