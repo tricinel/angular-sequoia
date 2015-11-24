@@ -1,3 +1,8 @@
+###v0.1.11
+___
+
+* Replace form with ng-form to allow for nested forms ([tricinel](http://github.com/tricinel))
+
 ###v0.1.10
 ___
 
