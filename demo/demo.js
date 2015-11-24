@@ -84,6 +84,7 @@ function MainController() {
 
   vm.treeOptions = {
     canEdit: true,
+    useModal: true,
     buttons: {
       edit: 'Edit nodes',
       select: 'Select node'
