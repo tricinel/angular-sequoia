@@ -1,6 +1,10 @@
 @import 'config';
 
 /* Sequoia */
+#sequoia-tree {
+  position: relative;
+}
+
 .sequoia {
 
   width: 100%;
@@ -145,6 +149,11 @@
     &.has-error {
       color: $sequoia-danger;
     }
+  }
+
+  .as-sortable-dragging {
+    background-color: lighten($sequoia-info, 40);
+    border: 1px dotted lighten($sequoia-info, 30);
   }
 
 }
