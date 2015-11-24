@@ -93,7 +93,7 @@
 
         scope.closeModal = function() {
           scope.modalShown = false;
-        }
+        };
 
         /* Handle adding and editing nodes */
         scope.toggleEditing = function(form) {
