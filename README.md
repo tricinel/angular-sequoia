@@ -64,16 +64,9 @@ function MainController() {
 
   vm.treeOptions = {
     canEdit: true,
+    useModal: false,
     buttons:  {
       done: 'Complete'
-    },
-    addNode: function(nodes) {
-      var id = Math.floor((Math.random() * 10000) + 1);
-      nodes.push({
-        _id: id,
-        title: 'Title ' + id,
-        nodes: []
-      });
     }
   };
 }
@@ -99,10 +92,11 @@ By `passing canEdit = true` via `vm.treeOptions` you are basically turning your 
 
 You can configure all the button texts and even pass in icons for buttons. You don't need to configure all, just the ones that you need. You can find the default buttons here: [default buttons](./src/sequoia.constants.js)
 
+Youc an also display the tree in an modal instead of the default inline. Just pass `useModal = true` via `vm.treeOptions`.
+
 ##### Coming next
 
 * Better visualiser for long titles
-* Drag and drop support when in edit mode
 * Infinite scroll for the nodes on any level
 
 ##### License
