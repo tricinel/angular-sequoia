@@ -16,8 +16,9 @@
       link: function(scope) {
         function init() {
           /* Set the default options*/
-          scope.options = _.defaults(scope.options, {canEdit: false, buttons: {}});
-          scope.canEdit = scope.options.canEdit ? true : false;
+          scope.options = _.defaults(scope.options, {canEdit: false, useModal: false, buttons: {}});
+          scope.canEdit = scope.options.canEdit;
+          scope.useModal = scope.options.useModal;
           scope.allowSelect = scope.model ? true : false;
           scope.model = _.isArray(scope.model) ? scope.model : [];
           scope.breadcrumbs = [];
@@ -79,7 +80,20 @@
         };
 
         init();
-        scope.load();
+
+        if(!scope.useModal) {
+          scope.load();
+        }
+
+        /* Handle Modal */
+        scope.showModal = function() {
+          scope.load();
+          scope.modalShown = true;
+        };
+
+        scope.closeModal = function() {
+          scope.modalShown = false;
+        }
 
         /* Handle adding and editing nodes */
         scope.toggleEditing = function(form) {
