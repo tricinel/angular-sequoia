@@ -1,3 +1,10 @@
+###v0.1.10
+___
+
+* Style modal ([tricinel](http://github.com/tricinel))
+* Add modal option and markup ([tricinel](http://github.com/tricinel))
+* Fix drag and drop positioning bug fix and style the dragging element ([tricinel](http://github.com/tricinel))
+
 ###v0.1.9
 ___
 
