@@ -16,7 +16,7 @@
       link: function(scope) {
         function init() {
           /* Set the default options*/
-          scope.options = _.defaults(scope.options, {canEdit: false, useModal: false, buttons: {}});
+          scope.options = _.defaults(scope.options || {}, {canEdit: false, useModal: false, buttons: {}});
           scope.canEdit = scope.options.canEdit;
           scope.useModal = scope.options.useModal;
           scope.allowSelect = scope.model ? true : false;
