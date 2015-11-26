@@ -35,7 +35,8 @@
             searchClear: scope.options.buttons.searchClear ? scope.options.buttons.searchClear : BUTTONS.searchClear,
             showSelected: scope.options.buttons.showSelected ? scope.options.buttons.showSelected : BUTTONS.showSelected,
             hideSelected: scope.options.buttons.hideSelected ? scope.options.buttons.hideSelected : BUTTONS.hideSelected,
-            backToList: scope.options.buttons.backToList ? scope.options.buttons.backToList : BUTTONS.backToList
+            backToList: scope.options.buttons.backToList ? scope.options.buttons.backToList : BUTTONS.backToList,
+            move: scope.options.buttons.move ? scope.options.buttons.move : BUTTONS.move
           };
         }
 

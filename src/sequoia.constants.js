@@ -13,7 +13,8 @@
     searchClear: '&times;',
     showSelected: 'Show selected',
     hideSelected: 'Hide selected',
-    backToList: 'Back to list'
+    backToList: 'Back to list',
+    move: 'Move'
   };
 
   var nodeTemplate = {
