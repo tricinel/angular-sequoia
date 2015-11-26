@@ -14,7 +14,8 @@
     showSelected: 'Show selected',
     hideSelected: 'Hide selected',
     backToList: 'Back to list',
-    move: 'Move'
+    move: 'Move',
+    modalSelect: 'Select'
   };
 
   var nodeTemplate = {
