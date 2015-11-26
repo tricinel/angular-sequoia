@@ -1,3 +1,10 @@
+###v0.1.12
+___
+
+* Add default Modal Select button text ([tricinel](http://github.com/tricinel))
+* Add default Move button text ([tricinel](http://github.com/tricinel))
+* Fix _defaults for undefined options ([tricinel](http://github.com/tricinel))
+
 ###v0.1.11
 ___
 
