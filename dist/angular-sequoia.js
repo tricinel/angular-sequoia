@@ -59,7 +59,9 @@
     searchClear: '&times;',
     showSelected: 'Show selected',
     hideSelected: 'Hide selected',
-    backToList: 'Back to list'
+    backToList: 'Back to list',
+    move: 'Move',
+    modalSelect: 'Select'
   };
 
   var nodeTemplate = {
@@ -92,7 +94,7 @@
       link: function(scope) {
         function init() {
           /* Set the default options*/
-          scope.options = _.defaults(scope.options, {canEdit: false, useModal: false, buttons: {}});
+          scope.options = _.defaults(scope.options || {}, {canEdit: false, useModal: false, buttons: {}});
           scope.canEdit = scope.options.canEdit;
           scope.useModal = scope.options.useModal;
           scope.allowSelect = scope.model ? true : false;
@@ -111,7 +113,9 @@
             searchClear: scope.options.buttons.searchClear ? scope.options.buttons.searchClear : BUTTONS.searchClear,
             showSelected: scope.options.buttons.showSelected ? scope.options.buttons.showSelected : BUTTONS.showSelected,
             hideSelected: scope.options.buttons.hideSelected ? scope.options.buttons.hideSelected : BUTTONS.hideSelected,
-            backToList: scope.options.buttons.backToList ? scope.options.buttons.backToList : BUTTONS.backToList
+            backToList: scope.options.buttons.backToList ? scope.options.buttons.backToList : BUTTONS.backToList,
+            move: scope.options.buttons.move ? scope.options.buttons.move : BUTTONS.move,
+            modalSelect: scope.options.buttons.modalSelect ? scope.options.buttons.modalSelect : BUTTONS.modalSelect
           };
         }
 
@@ -173,7 +177,6 @@
 
         /* Handle adding and editing nodes */
         scope.toggleEditing = function(form) {
-          console.log(form);
           //handle form validation
           if(scope.isEditing) {
             form.isSubmitted = true;
@@ -398,10 +401,10 @@
 
 })();
 
-angular.module("ngSequoia").run(["$templateCache", function($templateCache) {$templateCache.put("angular-sequoia.html","<div class=\"sequoia\">\n  <div class=\"sequoia-modal-container\" data-ng-if=\"useModal\">\n    <a href=\"\" class=\"sequoia-button sequoia-button-info\" data-ng-click=\"showModal()\" data-ng-bind=\"model.length ? \'Select (\' + model.length + \')\' : \'Select\'\"></a>\n    <div class=\"sequoia-overlay\" data-ng-show=\"modalShown\"></div>\n    <div class=\"sequoia-modal\" data-ng-show=\"modalShown\">\n      <div class=\"sequoia-modal-title\">\n        <h4 class=\"pull-left\">Select</h4>\n        <a href=\"\" class=\"sequoia-modal-close pull-right\" data-ng-click=\"closeModal()\">&times;</a>\n      </div>\n      <div data-ng-include=\"\'sequoia-tree.html\'\"></div>\n    </div>\n  </div>\n\n  <div data-ng-if=\"!useModal\" data-ng-include=\"\'sequoia-tree.html\'\"></div>\n\n</div>\n");
+angular.module("ngSequoia").run(["$templateCache", function($templateCache) {$templateCache.put("angular-sequoia.html","<div class=\"sequoia\">\n  <div class=\"sequoia-modal-container\" data-ng-if=\"useModal\">\n    <a href=\"\" class=\"sequoia-button sequoia-button-info\" data-ng-click=\"showModal()\" data-ng-bind=\"model.length ? buttons.modalSelect + \'(\' + model.length + \')\' : buttons.modalSelect\"></a>\n    <div class=\"sequoia-overlay\" data-ng-show=\"modalShown\"></div>\n    <div class=\"sequoia-modal\" data-ng-show=\"modalShown\">\n      <div class=\"sequoia-modal-title\">\n        <h4 class=\"pull-left\" data-ng-bind-html=\"buttons.modalSelect\"></h4>\n        <a href=\"\" class=\"sequoia-modal-close pull-right\" data-ng-click=\"closeModal()\">&times;</a>\n      </div>\n      <div data-ng-include=\"\'sequoia-tree.html\'\"></div>\n    </div>\n  </div>\n\n  <div data-ng-if=\"!useModal\" data-ng-include=\"\'sequoia-tree.html\'\"></div>\n\n</div>\n");
 $templateCache.put("sequoia-breadcrumbs.html","<li data-ng-if=\"breadcrumbs.length\" data-ng-repeat=\"link in breadcrumbs\" data-ng-class=\"$last ? \'last\' : \'\'\" data-ng-init=\"title = link[tree.template.title].length > 23 ? (link[tree.template.title] | limitTo:20) + \'&hellip;\' : link[tree.template.title]\">\n  <a data-ng-if=\"!$last\" href=\"\" data-ng-click=\"load(link)\" data-ng-bind=\"title\"></a>\n  <span data-ng-if=\"$last\" data-ng-bind=\"title\"></span>\n</li>");
 $templateCache.put("sequoia-item-actions.html","<span data-ng-if=\"isSelected(node)\">\n  <a class=\"sequoia-button sequoia-button-danger\" href=\"\" title=\"Deselect\" data-ng-click=\"deselect(node)\" data-ng-bind-html=\"buttons.deselect\"></a>\n</span>\n\n<span data-ng-if=\"!isSelected(node)\">\n  <a class=\"sequoia-button sequoia-button-primary\" href=\"\" title=\"Select\" data-ng-click=\"select(node)\" data-ng-bind-html=\"buttons.select\"></a>\n</span>\n\n<span data-ng-if=\"node[tree.template.nodes] && node[tree.template.nodes].length\">\n  <a class=\"sequoia-button sequoia-button-info\" href=\"\" title=\"Go to subitems\" data-ng-click=\"load(node)\" data-ng-bind-html=\"buttons.goToSubitems\"></a>\n</span>\n");
-$templateCache.put("sequoia-item-edit-actions.html","<span>\n  <a class=\"sequoia-button sequoia-button-danger\" href=\"\" title=\"Remove\" data-ng-click=\"remove(node)\" data-ng-bind-html=\"buttons.remove\"></a>\n</span>\n\n<span data-ng-if=\"node[tree.template.nodes] && node[tree.template.nodes].length\">\n  <a class=\"sequoia-button sequoia-button-info\" href=\"\" title=\"Go to subitems\" data-ng-click=\"load(node)\" data-ng-bind-html=\"buttons.goToSubitems\"></a>\n</span>\n\n<span data-ng-if=\"!node[tree.template.nodes] || !node[tree.template.nodes].length\">\n  <a class=\"sequoia-button sequoia-button-info\" href=\"\" title=\"Add subitems\" data-ng-click=\"addNode(node)\" data-ng-bind-html=\"buttons.addSubitems\"></a>\n</span>\n\n<span data-as-sortable-item-handle>\n  <a class=\"sequoia-button sequoia-button-default\" href=\"\">Move</a>\n</span>");
+$templateCache.put("sequoia-item-edit-actions.html","<span>\n  <a class=\"sequoia-button sequoia-button-danger\" href=\"\" title=\"Remove\" data-ng-click=\"remove(node)\" data-ng-bind-html=\"buttons.remove\"></a>\n</span>\n\n<span data-ng-if=\"node[tree.template.nodes] && node[tree.template.nodes].length\">\n  <a class=\"sequoia-button sequoia-button-info\" href=\"\" title=\"Go to subitems\" data-ng-click=\"load(node)\" data-ng-bind-html=\"buttons.goToSubitems\"></a>\n</span>\n\n<span data-ng-if=\"!node[tree.template.nodes] || !node[tree.template.nodes].length\">\n  <a class=\"sequoia-button sequoia-button-info\" href=\"\" title=\"Add subitems\" data-ng-click=\"addNode(node)\" data-ng-bind-html=\"buttons.addSubitems\"></a>\n</span>\n\n<span data-as-sortable-item-handle>\n  <a class=\"sequoia-button sequoia-button-default\" href=\"\" data-ng-bind-html=\"buttons.move\"></a>\n</span>");
 $templateCache.put("sequoia-item.html","<span class=\"sequoia-item-title\">\n  <span data-ng-if=\"!isEditing\" data-ng-bind=\"node[tree.template.title]\"></span>\n  <span data-ng-if=\"isEditing\">\n    <input required name=\"itemTitle_{{node[tree.template.id]}}\" type=\"text\" data-ng-model=\"node[tree.template.title]\" placeholder=\"Enter a {{tree.template.title}}\">\n    <p class=\"help-text has-error\" data-ng-show=\"form.isSubmitted && form[\'itemTitle_\' + node[tree.template.id]].$error.required\">The item {{tree.template.title}} is required!</p>\n  </span>\n</span>\n\n<span class=\"sequoia-item-actions\" data-ng-include=\"\'sequoia-item-actions.html\'\" data-ng-if=\"!isEditing\"></span>\n<span class=\"sequoia-item-actions\" data-ng-include=\"\'sequoia-item-edit-actions.html\'\" data-ng-if=\"isEditing\"></span>\n");
 $templateCache.put("sequoia-search.html","<ng-form name=\"sequoiaSearchForm\" data-ng-submit=\"search()\" novalidate>\n  <input type=\"text\" placeholder=\"Search for an item by {{tree.template.title}}\" data-ng-model=\"query\" name=\"search\" />\n  <a class=\"sequoia-button sequoia-button-default\" href=\"\" data-ng-if=\"isSearching\" data-ng-click=\"clear()\" data-ng-bind-html=\"buttons.searchClear\"></a>\n</ng-form>\n");
 $templateCache.put("sequoia-tree-actions.html","<ul>\n  <li data-ng-if=\"(model.length || onlySelected) && !isEditing\">\n    <a class=\"sequoia-button sequoia-button-info\" href=\"\" data-ng-click=\"toggleSelected()\" data-ng-bind-html=\"model.length && !onlySelected ? buttons.showSelected : !model.length && onlySelected ? buttons.backToList : buttons.hideSelected\"></a>\n  </li>\n\n  <li data-ng-if=\"isEditing || !tree.tree.length\">\n    <a class=\"sequoia-button sequoia-button-success\" href=\"\" data-ng-click=\"addNode()\" data-ng-bind-html=\"buttons.addNode\"></a>\n  </li>\n\n  <li data-ng-if=\"canEdit && tree.tree.length\">\n    <a class=\"sequoia-button sequoia-button-info\" href=\"\" data-ng-click=\"toggleEditing(sequoiaEditForm)\" data-ng-bind-html=\"isEditing ? buttons.done : buttons.edit\"></a>\n  </li>\n\n</ul>\n");
