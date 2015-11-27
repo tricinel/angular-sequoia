@@ -1,3 +1,8 @@
+###v0.1.13
+___
+
+* Add ability to limit selection ([tricinel](http://github.com/tricinel))
+
 ###v0.1.12
 ___
 
