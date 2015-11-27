@@ -1,3 +1,8 @@
+###v0.1.15
+___
+
+* Fix allowSelect when no model is provided ([tricinel](http://github.com/tricinel))
+
 ###v0.1.14
 ___
 
