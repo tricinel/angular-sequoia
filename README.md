@@ -63,6 +63,7 @@ function MainController() {
   ];
 
   vm.treeOptions = {
+    limit: 0,
     canEdit: true,
     useModal: false,
     buttons:  {
@@ -92,7 +93,9 @@ By `passing canEdit = true` via `vm.treeOptions` you are basically turning your 
 
 You can configure all the button texts and even pass in icons for buttons. You don't need to configure all, just the ones that you need. You can find the default buttons here: [default buttons](./src/sequoia.constants.js)
 
-Youc an also display the tree in an modal instead of the default inline. Just pass `useModal = true` via `vm.treeOptions`.
+You can also display the tree in an modal instead of the default inline. Just pass `useModal = true` via `vm.treeOptions`.
+
+You can impose a limit of many nodes you can select using `limit = 1`, which would limit the selection to 1.
 
 ##### Coming next
 
