@@ -102,6 +102,27 @@
       .sequoia .sequoia-modal-container .sequoia-modal::-webkit-scrollbar-thumb {
         background-color: #b6daf2;
         border-radius: 4px; }
+  .sequoia .sequoia-notification {
+    text-align: center;
+    width: 100%; }
+    .sequoia .sequoia-notification p {
+      padding: 3px 10px;
+      background-color: #fbe9d9;
+      border: 1px solid #f6ceab;
+      border-radius: 3px;
+      color: #e67e22;
+      font-size: 14px;
+      margin: 0px 10px; }
+      .sequoia .sequoia-notification p:before, .sequoia .sequoia-notification p:after {
+        content: " ";
+        display: table; }
+      .sequoia .sequoia-notification p:after {
+        clear: both; }
+      .sequoia .sequoia-notification p span {
+        margin-top: 4px; }
+      .sequoia .sequoia-notification p a {
+        color: #e67e22;
+        margin-top: -5px; }
   .sequoia .sequoia-search:before, .sequoia .sequoia-search:after {
     content: " ";
     display: table; }

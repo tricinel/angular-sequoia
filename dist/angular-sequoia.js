@@ -133,10 +133,14 @@
 
         scope.select = function(node) {
           if(node[scope.tree.template.id]) {
-            if(scope.isMultiSelect) {
-              scope.model.push(node[scope.tree.template.id]);
+            if(scope.options.limit !== 0 && scope.model.length === scope.options.limit) {
+              scope.notification = 'You cannot select more than ' + scope.options.limit + ' items!';
             } else {
-              scope.model = node[scope.tree.template.id];
+              if(scope.isMultiSelect) {
+                scope.model.push(node[scope.tree.template.id]);
+              } else {
+                scope.model = node[scope.tree.template.id];
+              }
             }
           }
         };
@@ -217,6 +221,10 @@
           if(index !== -1) {
             scope.tree.nodes.splice(index, 1);
           }
+        };
+
+        scope.closeNotification = function() {
+          scope.notification = '';
         };
       }
     };
@@ -421,4 +429,4 @@ $templateCache.put("sequoia-item-edit-actions.html","<span>\n  <a class=\"sequoi
 $templateCache.put("sequoia-item.html","<span class=\"sequoia-item-title\">\n  <span data-ng-if=\"!isEditing\" data-ng-bind=\"node[tree.template.title]\"></span>\n  <span data-ng-if=\"isEditing\">\n    <input required name=\"itemTitle_{{node[tree.template.id]}}\" type=\"text\" data-ng-model=\"node[tree.template.title]\" placeholder=\"Enter a {{tree.template.title}}\">\n    <p class=\"help-text has-error\" data-ng-show=\"form.isSubmitted && form[\'itemTitle_\' + node[tree.template.id]].$error.required\">The item {{tree.template.title}} is required!</p>\n  </span>\n</span>\n\n<span class=\"sequoia-item-actions\" data-ng-include=\"\'sequoia-item-actions.html\'\" data-ng-if=\"!isEditing\"></span>\n<span class=\"sequoia-item-actions\" data-ng-include=\"\'sequoia-item-edit-actions.html\'\" data-ng-if=\"isEditing\"></span>\n");
 $templateCache.put("sequoia-search.html","<ng-form name=\"sequoiaSearchForm\" data-ng-submit=\"search()\" novalidate>\n  <input type=\"text\" placeholder=\"Search for an item by {{tree.template.title}}\" data-ng-model=\"query\" name=\"search\" />\n  <a class=\"sequoia-button sequoia-button-default\" href=\"\" data-ng-if=\"isSearching\" data-ng-click=\"clear()\" data-ng-bind-html=\"buttons.searchClear\"></a>\n</ng-form>\n");
 $templateCache.put("sequoia-tree-actions.html","<ul>\n  <li data-ng-if=\"(model.length || onlySelected) && !isEditing\">\n    <a class=\"sequoia-button sequoia-button-info\" href=\"\" data-ng-click=\"toggleSelected()\" data-ng-bind-html=\"model.length && !onlySelected ? buttons.showSelected : !model.length && onlySelected ? buttons.backToList : buttons.hideSelected\"></a>\n  </li>\n\n  <li data-ng-if=\"isEditing || !tree.tree.length\">\n    <a class=\"sequoia-button sequoia-button-success\" href=\"\" data-ng-click=\"addNode()\" data-ng-bind-html=\"buttons.addNode\"></a>\n  </li>\n\n  <li data-ng-if=\"canEdit && tree.tree.length\">\n    <a class=\"sequoia-button sequoia-button-info\" href=\"\" data-ng-click=\"toggleEditing(sequoiaEditForm)\" data-ng-bind-html=\"isEditing ? buttons.done : buttons.edit\"></a>\n  </li>\n\n</ul>\n");
-$templateCache.put("sequoia-tree.html","<ng-form name=\"sequoiaEditForm\" novalidate>\n\n  <div class=\"sequoia-search\">\n    <div class=\"sequoia-search-form\" data-sequoia-search data-is-searching=\"searchEnabled\" data-tree=\"tree\" data-buttons=\"buttons\"></div>\n\n    <div class=\"sequoia-actions\" data-ng-include=\"\'sequoia-tree-actions.html\'\"></div>\n  </div>\n\n  <ul data-ng-if=\"!searchEnabled && !onlySelected\" class=\"sequoia-breadcrumbs\" data-ng-include=\"\'sequoia-breadcrumbs.html\'\"></ul>\n\n  <ul data-ng-if=\"isEditing\" id=\"sequoia-tree\" class=\"sequoia-tree\" data-as-sortable=\"{ containment: \'#sequoia-tree\', containerPositioning: \'relative\' }\" data-ng-model=\"tree.nodes\">\n    <li data-ng-repeat=\"node in tree.nodes track by node[tree.template.id]\" data-as-sortable-item data-ng-include=\"\'sequoia-item.html\'\"></li>\n  </ul>\n\n  <ul data-ng-if=\"!isEditing\" id=\"sequoia-tree\" class=\"sequoia-tree\">\n    <li data-ng-repeat=\"node in tree.nodes track by node[tree.template.id]\" data-ng-include=\"\'sequoia-item.html\'\"></li>\n  </ul>\n\n</ng-form>\n");}]);
+$templateCache.put("sequoia-tree.html","<ng-form name=\"sequoiaEditForm\" novalidate>\n\n  <div class=\"sequoia-search\">\n    <div class=\"sequoia-search-form\" data-sequoia-search data-is-searching=\"searchEnabled\" data-tree=\"tree\" data-buttons=\"buttons\"></div>\n\n    <div class=\"sequoia-actions\" data-ng-include=\"\'sequoia-tree-actions.html\'\"></div>\n  </div>\n\n  <ul data-ng-if=\"!searchEnabled && !onlySelected\" class=\"sequoia-breadcrumbs\" data-ng-include=\"\'sequoia-breadcrumbs.html\'\"></ul>\n\n  <div class=\"sequoia-notification\" data-ng-show=\"notification\">\n    <p>\n      <span class=\"pull-left\" data-ng-bind=\"notification\"></span>\n      <a class=\"pull-right sequoia-button\" href=\"\" data-ng-click=\"closeNotification()\" data-ng-bind-html=\"buttons.searchClear\"></a>\n    </p>\n  </div>\n\n  <ul data-ng-if=\"isEditing\" id=\"sequoia-tree\" class=\"sequoia-tree\" data-as-sortable=\"{ containment: \'#sequoia-tree\', containerPositioning: \'relative\' }\" data-ng-model=\"tree.nodes\">\n    <li data-ng-repeat=\"node in tree.nodes track by node[tree.template.id]\" data-as-sortable-item data-ng-include=\"\'sequoia-item.html\'\"></li>\n  </ul>\n\n  <ul data-ng-if=\"!isEditing\" id=\"sequoia-tree\" class=\"sequoia-tree\">\n    <li data-ng-repeat=\"node in tree.nodes track by node[tree.template.id]\" data-ng-include=\"\'sequoia-item.html\'\"></li>\n  </ul>\n\n</ng-form>\n");}]);
