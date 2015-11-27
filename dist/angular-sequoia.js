@@ -175,6 +175,13 @@
 
         init();
 
+        scope.$watch('treeNodes', function(newVal) {
+          if(newVal) {
+            scope.tree = new Tree(scope.treeNodes, scope.template);
+            scope.load();
+          }
+        }, true);
+
         if(!scope.useModal) {
           scope.load();
         }
