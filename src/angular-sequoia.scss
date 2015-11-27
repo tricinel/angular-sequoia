@@ -79,6 +79,32 @@
     }
   }
 
+  .sequoia-notification {
+    text-align: center;
+    width: 100%;
+
+    p {
+      @include clearfix;
+      padding: 3px 10px;
+
+      background-color: lighten($sequoia-warning, 40);
+      border: 1px solid lighten($sequoia-warning, 30);
+      border-radius: 3px;
+      color: $sequoia-warning;
+      font-size: 14px;
+      margin: 0px 10px;
+
+      span {
+        margin-top: 4px;
+      }
+
+      a {
+        color: $sequoia-warning;
+        margin-top: -5px;
+      }
+    }
+  }
+
   /* Search */
   .sequoia-search {
     @include clearfix;

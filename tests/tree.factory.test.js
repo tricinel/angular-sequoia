@@ -97,12 +97,26 @@ describe('Sequoia Tree Factory', function() {
     expect(found[0].title).toBe(path);
   });
 
-  it('should fail to retrieve the path to a node', function() {
+  it('should retrieve the path to a single node passed as a string', function() {
     var tree = new SequoiaTree(nodes,template),
-        found = tree.findSelected('12345');
+        found = tree.findSelected('1234');
+
+    expect(found.length).toBe(1);
+  });
+
+  it('should retrieve the path to two nodes passed as an array', function() {
+    var tree = new SequoiaTree(nodes,template),
+        found = tree.findSelected(['1234', '5678']);
+
+    expect(found.length).toBe(2);
+  });
+
+  it('should fail to retrieve the path to a node passed as an object', function() {
+    var tree = new SequoiaTree(nodes,template),
+        found = tree.findSelected({id: '1234'});
 
     expect(found.length).toBe(0);
-    expect(log.warn.logs).toContain(['You must pass an array of IDs in order to find the selected nodes!']);
+    expect(log.warn.logs).toContain(['You must pass an array of IDs or a single ID in order to find the selected nodes!']);
   });
 
   it('should create a new empty node', function() {

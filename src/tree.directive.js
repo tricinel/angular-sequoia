@@ -16,11 +16,12 @@
       link: function(scope) {
         function init() {
           /* Set the default options*/
-          scope.options = _.defaults(scope.options || {}, {canEdit: false, useModal: false, buttons: {}});
+          scope.options = _.defaults(scope.options || {}, {canEdit: false, useModal: false, buttons: {}, limit: 0});
           scope.canEdit = scope.options.canEdit;
           scope.useModal = scope.options.useModal;
           scope.allowSelect = scope.model ? true : false;
-          scope.model = _.isArray(scope.model) ? scope.model : [];
+          scope.isMultiSelect = scope.options.limit === 1 ? false : true;
+          scope.model = scope.isMultiSelect ? _.isArray(scope.model) ? scope.model : [] : '';
           scope.breadcrumbs = [];
           scope.tree = new Tree(scope.treeNodes, scope.template);
           scope.buttons = {
@@ -54,19 +55,32 @@
 
         scope.select = function(node) {
           if(node[scope.tree.template.id]) {
-            scope.model.push(node[scope.tree.template.id]);
+            if(scope.options.limit !== 0 && scope.model.length === scope.options.limit) {
+              scope.notification = 'You cannot select more than ' + scope.options.limit + ' items!';
+            } else {
+              if(scope.isMultiSelect) {
+                scope.model.push(node[scope.tree.template.id]);
+              } else {
+                scope.model = node[scope.tree.template.id];
+              }
+            }
           }
         };
 
         scope.deselect = function(node) {
-          var index = node[scope.tree.template.id] ? _.indexOf(scope.model,node[scope.tree.template.id]) : -1;
-          if(index !== -1) {
-            scope.model.splice(index, 1);
+          if(scope.isMultiSelect) {
+            var index = node[scope.tree.template.id] ? _.indexOf(scope.model,node[scope.tree.template.id]) : -1;
+            if(index !== -1) {
+              scope.model.splice(index, 1);
+            }
+          } else {
+            scope.model = '';
           }
+
         };
 
         scope.isSelected = function(node) {
-          return _.indexOf(scope.model, node[scope.tree.template.id]) !== -1 ? true : false;
+          return scope.isMultiSelect ? _.indexOf(scope.model, node[scope.tree.template.id]) !== -1 ? true : false : scope.model === node[scope.tree.template.id];
         };
 
         scope.toggleSelected = function() {
@@ -129,6 +143,10 @@
           if(index !== -1) {
             scope.tree.nodes.splice(index, 1);
           }
+        };
+
+        scope.closeNotification = function() {
+          scope.notification = '';
         };
       }
     };

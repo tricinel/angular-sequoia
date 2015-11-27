@@ -94,11 +94,12 @@
       link: function(scope) {
         function init() {
           /* Set the default options*/
-          scope.options = _.defaults(scope.options || {}, {canEdit: false, useModal: false, buttons: {}});
+          scope.options = _.defaults(scope.options || {}, {canEdit: false, useModal: false, buttons: {}, limit: 0});
           scope.canEdit = scope.options.canEdit;
           scope.useModal = scope.options.useModal;
           scope.allowSelect = scope.model ? true : false;
-          scope.model = _.isArray(scope.model) ? scope.model : [];
+          scope.isMultiSelect = scope.options.limit === 1 ? false : true;
+          scope.model = scope.isMultiSelect ? _.isArray(scope.model) ? scope.model : [] : '';
           scope.breadcrumbs = [];
           scope.tree = new Tree(scope.treeNodes, scope.template);
           scope.buttons = {
@@ -132,19 +133,28 @@
 
         scope.select = function(node) {
           if(node[scope.tree.template.id]) {
-            scope.model.push(node[scope.tree.template.id]);
+            if(scope.isMultiSelect) {
+              scope.model.push(node[scope.tree.template.id]);
+            } else {
+              scope.model = node[scope.tree.template.id];
+            }
           }
         };
 
         scope.deselect = function(node) {
-          var index = node[scope.tree.template.id] ? _.indexOf(scope.model,node[scope.tree.template.id]) : -1;
-          if(index !== -1) {
-            scope.model.splice(index, 1);
+          if(scope.isMultiSelect) {
+            var index = node[scope.tree.template.id] ? _.indexOf(scope.model,node[scope.tree.template.id]) : -1;
+            if(index !== -1) {
+              scope.model.splice(index, 1);
+            }
+          } else {
+            scope.model = '';
           }
+
         };
 
         scope.isSelected = function(node) {
-          return _.indexOf(scope.model, node[scope.tree.template.id]) !== -1 ? true : false;
+          return scope.isMultiSelect ? _.indexOf(scope.model, node[scope.tree.template.id]) !== -1 ? true : false : scope.model === node[scope.tree.template.id];
         };
 
         scope.toggleSelected = function() {
@@ -362,20 +372,23 @@
       return results;
     };
 
-    SequoiaTree.prototype.findSelected = function(ids) {
+    SequoiaTree.prototype.findSelected = function(obj) {
       var selected = [],
           results = [];
 
-      if(_.isArray(ids)) {
-        for(var i=0;i<ids.length;i++) {
-          selected = _.union(selected, _selected(ids[i], this.tree, [], this.template));
+      if(_.isArray(obj)) {
+        for(var i=0;i<obj.length;i++) {
+          selected = _.union(selected, _selected(obj[i], this.tree, [], this.template));
         }
 
         for(var j=0;j<selected.length;j++) {
           results.push(_createNodeWithFullPathAsTitle(selected[j], this.tree,this.template));
         }
+      } else if(_.isString(obj)) {
+        selected = _selected(obj, this.tree, [], this.template);
+        results.push(_createNodeWithFullPathAsTitle(selected[0], this.tree, this.template));
       } else {
-        $log.warn('You must pass an array of IDs in order to find the selected nodes!');
+        $log.warn('You must pass an array of IDs or a single ID in order to find the selected nodes!');
       }
 
       return results;
