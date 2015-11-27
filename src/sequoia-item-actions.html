@@ -1,8 +1,8 @@
-<span data-ng-if="isSelected(node)">
+<span data-ng-if="allowSelect && isSelected(node)">
   <a class="sequoia-button sequoia-button-danger" href="" title="Deselect" data-ng-click="deselect(node)" data-ng-bind-html="buttons.deselect"></a>
 </span>
 
-<span data-ng-if="!isSelected(node)">
+<span data-ng-if="allowSelect && !isSelected(node)">
   <a class="sequoia-button sequoia-button-primary" href="" title="Select" data-ng-click="select(node)" data-ng-bind-html="buttons.select"></a>
 </span>
 
