@@ -1,3 +1,9 @@
+###v0.1.14
+___
+
+* Add watch in case there is an async request for treeNodes ([tricinel](http://github.com/tricinel))
+* Fix modal select button text when limit=1 ([tricinel](http://github.com/tricinel))
+
 ###v0.1.13
 ___
 
