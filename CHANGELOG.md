@@ -1,3 +1,8 @@
+###v0.1.18
+___
+
+* Fix ng-submit as part of ng-form for searching ([tricinel](http://github.com/tricinel))
+
 ###v0.1.16
 ___
 
