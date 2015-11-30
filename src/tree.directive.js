@@ -16,10 +16,10 @@
       link: function(scope) {
         function init() {
           /* Set the default options*/
-          scope.options = _.defaults(scope.options || {}, {canEdit: false, useModal: false, buttons: {}, limit: 0});
+          scope.options = _.defaults(scope.options || {}, {allowSelect: true, canEdit: false, useModal: false, buttons: {}, limit: 0});
           scope.canEdit = scope.options.canEdit;
           scope.useModal = scope.options.useModal;
-          scope.allowSelect = scope.model ? true : false;
+          scope.allowSelect = scope.options.allowSelect;
           scope.isMultiSelect = scope.options.limit === 1 ? false : true;
           scope.model = scope.isMultiSelect ? _.isArray(scope.model) ? scope.model : [] : '';
           scope.breadcrumbs = [];
@@ -43,7 +43,6 @@
         }
 
         scope.load = function(node) {
-          console.log(scope.allowSelect);
           scope.onlySelected = false;
           if(scope.tree.isValidNode(node)) {
             scope.tree.setCurrentNodes(node[scope.tree.template.nodes]);
