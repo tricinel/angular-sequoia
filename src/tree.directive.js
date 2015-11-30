@@ -16,9 +16,9 @@
       link: function(scope) {
         function init() {
           /* Set the default options*/
-          scope.options = _.defaults(scope.options || {}, {allowSelect: true, canEdit: false, useModal: false, buttons: {}, limit: 0});
+          scope.options = _.defaults(scope.options || {}, {allowSelect: true, canEdit: false, inline: false, buttons: {}, limit: 0});
           scope.canEdit = scope.options.canEdit;
-          scope.useModal = scope.options.useModal;
+          scope.inline = scope.options.inline;
           scope.allowSelect = scope.options.allowSelect;
           scope.isMultiSelect = scope.options.limit === 1 ? false : true;
           scope.model = scope.isMultiSelect ? _.isArray(scope.model) ? scope.model : [] : '';
@@ -104,7 +104,7 @@
           }
         }, true);
 
-        if(!scope.useModal) {
+        if(!scope.inline) {
           scope.load();
         }
 
