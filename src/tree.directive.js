@@ -23,7 +23,7 @@
           scope.isMultiSelect = scope.options.limit === 1 ? false : true;
           scope.model = scope.isMultiSelect ? _.isArray(scope.model) ? scope.model : [] : '';
           scope.breadcrumbs = [];
-          scope.tree = new Tree(scope.treeNodes, scope.template);
+          scope.tree = new Tree(angular.copy(scope.treeNodes), scope.template);
           scope.buttons = {
             edit: scope.options.buttons.edit ? scope.options.buttons.edit : BUTTONS.edit,
             select: scope.options.buttons.select ? scope.options.buttons.select : BUTTONS.select,
@@ -43,6 +43,7 @@
         }
 
         scope.load = function(node) {
+          console.log(scope.allowSelect);
           scope.onlySelected = false;
           if(scope.tree.isValidNode(node)) {
             scope.tree.setCurrentNodes(node[scope.tree.template.nodes]);
@@ -99,7 +100,7 @@
 
         scope.$watch('treeNodes', function(newVal) {
           if(newVal) {
-            scope.tree = new Tree(scope.treeNodes, scope.template);
+            scope.tree = new Tree(angular.copy(scope.treeNodes), scope.template);
             scope.load();
           }
         }, true);
@@ -128,10 +129,9 @@
             return;
           }
 
+          scope.treeNodes = angular.copy(scope.tree.tree);
+
           scope.isEditing = !scope.isEditing;
-          if(scope.isEditing) {
-            scope.allowSelect = false;
-          }
         };
 
         scope.addNode = function(node) {
@@ -140,8 +140,6 @@
           }
 
           scope.tree.nodes.push(scope.tree.newNode());
-          scope.treeNodes = angular.copy(scope.tree.tree);
-          scope.allowSelect = false;
           scope.isEditing = true;
         };
 
