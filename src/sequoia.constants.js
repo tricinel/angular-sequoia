@@ -10,6 +10,7 @@
     addNode: 'Add node',
     remove: 'Delete',
     done: 'Done',
+    search: '&rsaquo;',
     searchClear: '&times;',
     showSelected: 'Show selected',
     hideSelected: 'Hide selected',

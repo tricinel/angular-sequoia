@@ -33,6 +33,7 @@
             addNode: scope.options.buttons.addNode ? scope.options.buttons.addNode : BUTTONS.addNode,
             remove: scope.options.buttons.remove ? scope.options.buttons.remove : BUTTONS.remove,
             done: scope.options.buttons.done ? scope.options.buttons.done : BUTTONS.done,
+            search: scope.options.buttons.search ? scope.options.buttons.search : BUTTONS.search,
             searchClear: scope.options.buttons.searchClear ? scope.options.buttons.searchClear : BUTTONS.searchClear,
             showSelected: scope.options.buttons.showSelected ? scope.options.buttons.showSelected : BUTTONS.showSelected,
             hideSelected: scope.options.buttons.hideSelected ? scope.options.buttons.hideSelected : BUTTONS.hideSelected,
