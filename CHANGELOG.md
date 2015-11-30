@@ -1,3 +1,8 @@
+###v0.1.16
+___
+
+* Fix allowSelect and async tree updates ([tricinel](http://github.com/tricinel))
+
 ###v0.1.15
 ___
 
