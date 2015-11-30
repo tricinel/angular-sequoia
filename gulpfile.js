@@ -8,6 +8,7 @@ var sass         = require('gulp-sass');
 var csso         = require('gulp-csso');
 var autoprefixer = require('gulp-autoprefixer');
 var karmaServer  = require('karma').Server;
+var bump         = require('gulp-bump');
 
 gulp.task('scss', function () {
   return gulp.src(['src/**/*.scss'])
@@ -52,6 +53,12 @@ gulp.task('clean', function(cb) {
   del(['dist'], cb);
 });
 
+gulp.task('bump', function(){
+  gulp.src('./bower.json')
+  .pipe(bump())
+  .pipe(gulp.dest('./'));
+});
+
 gulp.task('scripts', ['lint', 'js'], function(){
   return gulp.src(['dist/*.js', '!dist/*.min.js'])
     .pipe(uglify())
@@ -72,7 +79,7 @@ gulp.task('styles', ['scss'], function(){
 
 gulp.task('default', ['js', 'scss', 'watch']);
 
-gulp.task('build', ['scripts', 'styles']);
+gulp.task('build', ['scripts', 'styles', 'bump']);
 
 gulp.task('test', ['js', 'scss'], function(done) {
   new karmaServer({configFile: __dirname + '/karma.conf.js', singleRun: true, autoWatch: false},done).start();
