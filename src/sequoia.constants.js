@@ -24,8 +24,17 @@
     title: 'title'
   };
 
+  var defaultOptions = {
+    allowSelect: true,
+    canEdit: false,
+    inline: false,
+    buttons: {},
+    limit: 0
+  };
+
   angular.module('ngSequoia')
     .constant('BUTTONS', buttons)
-    .constant('NODE_TEMPLATE', nodeTemplate);
+    .constant('NODE_TEMPLATE', nodeTemplate)
+    .constant('DEFAULT_OPTIONS', defaultOptions);
 
 })();

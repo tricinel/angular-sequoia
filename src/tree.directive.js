@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  function sequoiaTreeDirective(Tree, BUTTONS){
+  function sequoiaTreeDirective(Tree, BUTTONS, DEFAULT_OPTIONS){
 
     return {
       restrict: 'AE',
@@ -16,7 +16,7 @@
       link: function(scope) {
         function init() {
           /* Set the default options*/
-          scope.options = _.defaults(scope.options || {}, {allowSelect: true, canEdit: false, inline: false, buttons: {}, limit: 0});
+          scope.options = _.defaults(scope.options || {}, DEFAULT_OPTIONS);
           scope.canEdit = scope.options.canEdit;
           scope.inline = scope.options.inline;
           scope.allowSelect = scope.options.allowSelect;
