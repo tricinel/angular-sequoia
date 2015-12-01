@@ -7,8 +7,10 @@ var gulp = require('gulp'),
     });
 
 gulp.task('bump-version', function(){
-  gulp.src('./bower.json')
-  .pipe($.bump())
+  var bumpType = process.env.BUMP || 'patch'; // major.minor.patch
+
+  gulp.src(['./bower.json', './package.json'])
+  .pipe($.bump({ type: bumpType }))
   .pipe(gulp.dest('./'));
 });
 
