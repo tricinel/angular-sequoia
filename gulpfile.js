@@ -9,6 +9,7 @@ var csso         = require('gulp-csso');
 var autoprefixer = require('gulp-autoprefixer');
 var karmaServer  = require('karma').Server;
 var bump         = require('gulp-bump');
+var stripDebug = require('gulp-strip-debug');
 
 gulp.task('scss', function () {
   return gulp.src(['src/**/*.scss'])
@@ -61,6 +62,7 @@ gulp.task('bump', function(){
 
 gulp.task('scripts', ['lint', 'js'], function(){
   return gulp.src(['dist/*.js', '!dist/*.min.js'])
+    .pipe(stripDebug())
     .pipe(uglify())
     .pipe(rename({
       extname: '.min.js'
