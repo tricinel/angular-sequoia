@@ -1,6 +1,7 @@
 {
   "name": "angular-sequoia",
-  "version": "1.0.0",
+  "version": "0.1.18",
+  "license": "MIT",
   "author": "Bogdan Lazar <bogdan@blazardesign.com>",
   "repository": {
     "type": "git",
