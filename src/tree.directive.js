@@ -81,7 +81,9 @@
         };
 
         scope.isSelected = function(node) {
-          return scope.isMultiSelect ? _.indexOf(scope.model, node[scope.tree.template.id]) !== -1 ? true : false : scope.model === node[scope.tree.template.id];
+          if(scope.tree.isValidNode(node)) {
+            return scope.isMultiSelect ? _.indexOf(scope.model, node[scope.tree.template.id]) !== -1 ? true : false : scope.model === node[scope.tree.template.id];
+          }
         };
 
         scope.toggleSelected = function() {
