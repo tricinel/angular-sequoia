@@ -1,3 +1,12 @@
+###v0.1.19
+___
+
+* Fix bug that was showing the edit button when showing selected nodes ([tricinel](http://github.com/tricinel))
+* Revert "Fix bug that tried to select invalid node" ([tricinel](http://github.com/tricinel))
+* Add DEFAULT_OPTIONS for injector ([tricinel](http://github.com/tricinel))
+* Fix bug that was hiding the Done button when the user deleted all the tree nodes in edit mode ([tricinel](http://github.com/tricinel))
+* Fix bug that tried to select invalid node ([tricinel](http://github.com/tricinel))
+
 ###v0.1.18
 ___
 
