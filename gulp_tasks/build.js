@@ -20,4 +20,33 @@ gulp.task('clean', function(cb) {
 
 gulp.task('build', ['clean', 'scripts', 'styles']);
 
-gulp.task('release', ['build', 'bump-version']);
+gulp.task('release', ['build', 'bump-version'], function (done) {
+  var pkg = require('./../bower.json'),
+      v = 'v' + pkg.version,
+      message = 'Release ' + v;
+
+  gulp.src('./')
+    .pipe($.git.add())
+    .pipe($.git.commit(message))
+    .pipe(gulp.dest('./'))
+    .on('end', tag);
+
+  function tag(){
+    $.git.tag(v, message);
+
+    gulp.src('changelog.sh', {read: false})
+      .pipe($.shell(['bash <%= file.path %>']))
+      .on('end', function() {
+        gulp.src('./')
+          .pipe($.git.add())
+          .pipe($.git.commit('Update CHANGELOG.MD for ' + v + ' #nochangelog'))
+          .pipe(gulp.dest('./'))
+          .on('end', function() {
+            $.git.push('origin', 'master', { args: '--tags' });
+          });
+      });
+
+    done();
+  }
+
+});
