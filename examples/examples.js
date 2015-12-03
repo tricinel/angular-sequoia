@@ -1,6 +1,6 @@
 'use strict';
 
-function MainController() {
+function MainController($timeout) {
   var vm = this;
 
   vm.selectedNodes = [];
@@ -11,7 +11,7 @@ function MainController() {
     title: 'title'
   };
 
-  vm.tree = [
+  var tree = [
     {
       _id: '123412341234',
       title: 'Title one',
@@ -82,16 +82,41 @@ function MainController() {
     }
   ];
 
-  vm.treeOptions = {
-    canEdit: true,
-    useModal: true,
-    buttons: {
-      edit: 'Edit nodes',
-      select: 'Select node'
-    }
-  };
+  /* Setup all demos */
+
+  //Tree edit
+  vm.treeEdit = angular.copy(tree);
+  vm.treeEditOptions = { canEdit: true, inline: true, allowSelect: false };
+
+  //Tree create
+  vm.treeCreate = [];
+  vm.treeCreateOptions = { canEdit: true, inline: true, allowSelect: false };
+
+  //Tree create
+  vm.treeSelect = angular.copy(tree);
+  vm.treeSelectOptions = { canEdit: false, inline: true };
+
+  //Tree full
+  vm.treeFull = angular.copy(tree);
+  vm.treeFullOptions = { canEdit: true, inline: true, allowSelect: true };
+
+  //Tree view
+  vm.treeView = angular.copy(tree);
+  vm.treeViewOptions = { canEdit: false, inline: true, allowSelect: false };
+
+  //Tree modal
+  vm.treeModalOptions = { canEdit: true, inline: false, allowSelect: true };
+
+  //Tree async
+  vm.treeAsync = [];
+  vm.treeAsyncOptions = { canEdit: false, inline: true, allowSelect: false };
+  $timeout(function(){
+    vm.treeAsync = angular.copy(tree);
+  }, 1000);
 
 }
+
+MainController.$inject = ['$timeout'];
 
 var app = angular.module('sequioaDemo', ['ngSequoia', 'ngSanitize']);
 

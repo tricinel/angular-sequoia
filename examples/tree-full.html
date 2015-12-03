@@ -12,14 +12,12 @@
   <link rel="stylesheet" href="../dist/angular-sequoia.css">
   <link rel="stylesheet" href="../bower_components/ng-sortable/dist/ng-sortable.css">
 
-  <link rel="stylesheet" href="demo/demo.css">
+  <link rel="stylesheet" href="examples/examples.css">
 </head>
 <body>
 
   <div data-ng-controller="MainController as vm">
-    <pre>{{ vm.selectedNodes | json }}</pre>
-
-    <div data-sequoia-tree="vm.tree" data-ng-model="vm.selectedNodes" data-node-template="vm.template" data-options="vm.treeOptions"></div>
+    <div data-sequoia-tree="vm.treeFull" data-ng-model="vm.selectedNodes" data-node-template="vm.template" data-options="vm.treeFullOptions"></div>
   </div>
 
   <script src="../bower_components/angular/angular.js"></script>
@@ -29,6 +27,6 @@
   <script src="../bower_components/ng-sortable/dist/ng-sortable.js"></script>
 
   <script src="../dist/angular-sequoia.js"></script>
-  <script src="demo/demo.js"></script>
+  <script src="examples/examples.js"></script>
 </body>
 </html>

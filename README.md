@@ -34,7 +34,7 @@ angular.module('myApp', ['ngSequoia']);
 ```
 
 ###### Html Structure:
-You can also check out the [demo](./demo) folder.
+You can also check out the [examples](./examples) folder.
 
 ```javascript
 function MainController() {
