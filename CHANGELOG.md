@@ -3,6 +3,14 @@ ___
 
 * Fix ng-submit as part of ng-form for searching ([tricinel](http://github.com/tricinel))
 
+###v0.1.17
+___
+
+* Fix inline to display inline and not the other way around ([tricinel](http://github.com/tricinel))
+* Move default options to constant ([tricinel](http://github.com/tricinel))
+* Change useModal to inline ([tricinel](http://github.com/tricinel))
+* Add allowSelect as part of the options passed to the tree ([tricinel](http://github.com/tricinel))
+
 ###v0.1.16
 ___
 
