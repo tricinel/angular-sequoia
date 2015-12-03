@@ -20,4 +20,4 @@ gulp.task('clean', function(cb) {
 
 gulp.task('build', ['clean', 'scripts', 'styles']);
 
-gulp.task('bump', ['build', 'bump-version']);
+gulp.task('release', ['build', 'bump-version']);

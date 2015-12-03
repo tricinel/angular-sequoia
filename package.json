@@ -42,6 +42,7 @@
     "start": "gulp watch",
     "test": "gulp test",
     "watch-test": "gulp watch-test",
-    "build": "gulp build"
+    "build": "gulp build",
+    "release": "gulp release"
   }
 }
