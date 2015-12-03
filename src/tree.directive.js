@@ -160,7 +160,7 @@
 
   }
 
-  sequoiaTreeDirective.$inject = ['SequoiaTree', 'BUTTONS'];
+  sequoiaTreeDirective.$inject = ['SequoiaTree', 'BUTTONS', 'DEFAULT_OPTIONS'];
 
   angular.module('ngSequoia')
     .directive('sequoiaTree', sequoiaTreeDirective);
