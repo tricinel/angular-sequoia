@@ -11,7 +11,7 @@ else
   lasttag=$(git describe --tags --abbrev=0 ${currenttag}^)
 fi
 
-changes=$(git log --no-walk ${lasttag}...${currenttag} --pretty=format:"* %s ([%an](http://github.com/%an))" | awk '!(/Bump/ || /Merge/ || /Build/ || /#nochangelog/)')
+changes=$(git log --no-walk ${lasttag}...${currenttag} --pretty=format:"* %s ([%an](http://github.com/%an))" | awk '!(/Bump/ || /Merge/ || /Build/ || /Release/ || /#nochangelog/)')
 
 echo "----> Appending changes since ${lasttag} to the changelog."
 
