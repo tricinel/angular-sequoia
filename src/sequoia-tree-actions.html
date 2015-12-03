@@ -3,11 +3,11 @@
     <a class="sequoia-button sequoia-button-info" href="" data-ng-click="toggleSelected()" data-ng-bind-html="model.length && !onlySelected ? buttons.showSelected : !model.length && onlySelected ? buttons.backToList : buttons.hideSelected"></a>
   </li>
 
-  <li data-ng-if="isEditing || !tree.tree.length">
+  <li data-ng-if="isEditing">
     <a class="sequoia-button sequoia-button-success" href="" data-ng-click="addNode()" data-ng-bind-html="buttons.addNode"></a>
   </li>
 
-  <li data-ng-if="canEdit && tree.tree.length">
+  <li data-ng-if="canEdit">
     <a class="sequoia-button sequoia-button-info" href="" data-ng-click="toggleEditing(sequoiaEditForm)" data-ng-bind-html="isEditing ? buttons.done : buttons.edit"></a>
   </li>
 
