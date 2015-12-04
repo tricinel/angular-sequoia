@@ -92,9 +92,13 @@ function MainController($timeout) {
   vm.treeCreate = [];
   vm.treeCreateOptions = { canEdit: true, inline: true, allowSelect: false };
 
-  //Tree create
+  //Tree select
   vm.treeSelect = angular.copy(tree);
   vm.treeSelectOptions = { canEdit: false, inline: true };
+
+  //Tree single select
+  vm.treeSingleSelect = angular.copy(tree);
+  vm.treeSingleSelectOptions = { canEdit: false, inline: true, limit: 1 };
 
   //Tree full
   vm.treeFull = angular.copy(tree);
