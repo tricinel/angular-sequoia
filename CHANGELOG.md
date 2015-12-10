@@ -1,3 +1,8 @@
+###v0.1.20
+___
+
+* Fix always empty model when limit=1 ([tricinel](http://github.com/tricinel))
+
 ###v0.1.19
 ___
 
