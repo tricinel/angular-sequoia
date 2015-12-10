@@ -99,6 +99,7 @@ function MainController($timeout) {
   //Tree single select
   vm.treeSingleSelect = angular.copy(tree);
   vm.treeSingleSelectOptions = { canEdit: false, inline: true, limit: 1 };
+  vm.singleSelectedNode = '123412341234';
 
   //Tree full
   vm.treeFull = angular.copy(tree);
