@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  function sequoiaTreeDirective(Tree, BUTTONS, DEFAULT_OPTIONS){
+  function sequoiaTreeDirective(Tree, BUTTONS, DEFAULT_OPTIONS, SORTABLE_OPTIONS){
 
     return {
       restrict: 'AE',
@@ -25,6 +25,7 @@
           scope.breadcrumbs = [];
           scope.tree = new Tree(angular.copy(scope.treeNodes), scope.template);
           scope.buttons = _.defaults(scope.options.buttons, BUTTONS);
+          scope.sortableOptions = SORTABLE_OPTIONS;
         }
 
         scope.load = function(node) {
@@ -36,6 +37,10 @@
             scope.tree.setCurrentNodes();
             scope.breadcrumbs = [];
           }
+        };
+
+        scope.loadMore = function() {
+          scope.tree.setCurrentNodes(scope.tree.getNodesInPath());
         };
 
         scope.select = function(node) {
@@ -142,7 +147,7 @@
 
   }
 
-  sequoiaTreeDirective.$inject = ['SequoiaTree', 'BUTTONS', 'DEFAULT_OPTIONS'];
+  sequoiaTreeDirective.$inject = ['SequoiaTree', 'BUTTONS', 'DEFAULT_OPTIONS', 'SORTABLE_OPTIONS'];
 
   angular.module('ngSequoia')
     .directive('sequoiaTree', sequoiaTreeDirective);

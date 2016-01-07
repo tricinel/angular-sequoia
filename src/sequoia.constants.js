@@ -33,9 +33,16 @@
     limit: 0
   };
 
+  var sortableOptions = {
+    sort: true,
+    handle: '.sequoia-move-handle',
+    ghostClass: 'as-sortable-dragging'
+  };
+
   angular.module('ngSequoia')
     .constant('BUTTONS', buttons)
     .constant('NODE_TEMPLATE', nodeTemplate)
-    .constant('DEFAULT_OPTIONS', defaultOptions);
+    .constant('DEFAULT_OPTIONS', defaultOptions)
+    .constant('SORTABLE_OPTIONS', sortableOptions);
 
 })();

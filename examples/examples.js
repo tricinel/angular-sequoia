@@ -119,6 +119,12 @@ function MainController($timeout) {
     vm.treeAsync = angular.copy(tree);
   }, 1000);
 
+  //Tree for infinite scroll
+  vm.treeInfiniteScroll = angular.copy(tree);
+  for(var i=0;i<100;i++) {
+    vm.treeInfiniteScroll.push({_id: 'generated_' + i, title: 'Generated title ' + i,});
+  }
+
 }
 
 MainController.$inject = ['$timeout'];

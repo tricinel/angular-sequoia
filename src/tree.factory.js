@@ -3,7 +3,7 @@
 
   function SequoiaTreeFactory($log, NODE_TEMPLATE) {
 
-    var _checkNodeStructure, _exists, _contains, _buildBreadCrumbs, _buildPath, _selected, _createNodeWithFullPathAsTitle, _guid;
+    var _checkNodeStructure, _exists, _contains, _buildBreadCrumbs, _buildPath, _selected, _createNodeWithFullPathAsTitle, _guid, _paginate;
 
     var SequoiaTree = function(tree, template) {
       this.template = template || NODE_TEMPLATE;
@@ -111,8 +111,17 @@
       return result;
     };
 
+    SequoiaTree.prototype.paginate = function(nodes, startkey, limit) {
+      return nodes.length > limit ? nodes.slice(startkey, startkey + limit) : nodes;
+    };
+
     SequoiaTree.prototype.setCurrentNodes = function(nodes) {
-      this.nodes = !_.isArray(nodes) ? this.tree : nodes;
+      var limit = 20,
+          current = _.isArray(this.nodes) && this.nodes.length ? this.nodes : this.paginate(this.tree, 0, limit),
+          nodesInPath = this.getNodesInPath(),
+          startkey = _.indexOf(nodesInPath, _.last(current));
+
+      this.nodes = _.union(current, this.paginate(nodesInPath, startkey, limit));
     };
 
     SequoiaTree.prototype.setNodesInPath = function(nodes) {
