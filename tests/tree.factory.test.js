@@ -51,11 +51,35 @@ describe('Sequoia Tree Factory', function() {
     expect(tree.isValidNode(node)).toBeTruthy();
   });
 
+  it('should set reset the startkey for pagination and empty the current nodes', function() {
+    var tree = new SequoiaTree(nodes,template);
+
+    tree.setCurrentNodes();
+    expect(tree.nodes).toEqual([]);
+    expect(tree.pagination.startkey).toEqual(0);
+  });
+
   it('should set the current nodes to the tree nodes', function() {
     var tree = new SequoiaTree(nodes,template);
 
     tree.setCurrentNodes();
+    tree.paginate();
     expect(tree.nodes).toEqual(nodes);
+  });
+
+  it('should paginate', function() {
+    var tree, i;
+
+    for(i=0;i<25;i++) {
+      nodes.push({_id: 'generated_' + i, title: 'Generated title ' + i});
+    }
+
+    tree = new SequoiaTree(nodes,template);
+
+    tree.setCurrentNodes();
+    tree.paginate();
+    expect(tree.currentNodes.length).toEqual(nodes.length);
+    expect(tree.nodes.length).toEqual(tree.pagination.limit);
   });
 
   it('should set the current nodes to passed nodes', function() {
@@ -63,6 +87,7 @@ describe('Sequoia Tree Factory', function() {
         tree = new SequoiaTree(nodes,template);
 
     tree.setCurrentNodes(someNodes);
+    tree.paginate();
     expect(tree.nodes).toEqual(someNodes);
   });
 

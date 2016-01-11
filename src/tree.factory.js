@@ -3,11 +3,15 @@
 
   function SequoiaTreeFactory($log, NODE_TEMPLATE) {
 
-    var _checkNodeStructure, _exists, _contains, _buildBreadCrumbs, _buildPath, _selected, _createNodeWithFullPathAsTitle, _guid, _paginate;
+    var _checkNodeStructure, _exists, _contains, _buildBreadCrumbs, _buildPath, _selected, _createNodeWithFullPathAsTitle, _guid;
 
     var SequoiaTree = function(tree, template) {
       this.template = template || NODE_TEMPLATE;
       this.tree = _checkNodeStructure(_.isArray(tree) ? tree[0] : {}, this.template) ? tree : [];
+      this.pagination = {
+        startkey: 0,
+        limit: 20
+      };
     };
 
     _guid = function() {
@@ -111,17 +115,22 @@
       return result;
     };
 
-    SequoiaTree.prototype.paginate = function(nodes, startkey, limit) {
-      return nodes.length > limit ? nodes.slice(startkey, startkey + limit) : nodes;
+    SequoiaTree.prototype.paginate = function() {
+      var paginate = function(nodes, limit, startkey) {
+          return nodes.length > limit ? nodes.slice(startkey, startkey + limit) : nodes;
+        },
+        append = paginate(this.currentNodes, this.pagination.limit, this.pagination.startkey);
+
+      //set the new startkey
+      this.pagination.startkey = _.indexOf(this.currentNodes, _.last(append));
+      //set the new nodes
+      this.nodes = _.union(this.nodes, append);
     };
 
     SequoiaTree.prototype.setCurrentNodes = function(nodes) {
-      var limit = 20,
-          current = _.isArray(this.nodes) && this.nodes.length ? this.nodes : this.paginate(this.tree, 0, limit),
-          nodesInPath = this.getNodesInPath(),
-          startkey = _.indexOf(nodesInPath, _.last(current));
-
-      this.nodes = _.union(current, this.paginate(nodesInPath, startkey, limit));
+      this.nodes = [];
+      this.pagination.startkey = 0;
+      this.currentNodes = !_.isArray(nodes) ? this.tree : nodes;
     };
 
     SequoiaTree.prototype.setNodesInPath = function(nodes) {

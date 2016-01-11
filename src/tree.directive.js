@@ -37,10 +37,12 @@
             scope.tree.setCurrentNodes();
             scope.breadcrumbs = [];
           }
+
+          scope.tree.paginate();
         };
 
         scope.loadMore = function() {
-          scope.tree.setCurrentNodes(scope.tree.getNodesInPath());
+          scope.tree.paginate();
         };
 
         scope.select = function(node) {
@@ -83,6 +85,8 @@
             scope.tree.setNodesInPath(scope.tree.nodes);
             scope.tree.setCurrentNodes(selected);
           }
+
+          scope.tree.paginate();
         };
 
         init();
