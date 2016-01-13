@@ -1,3 +1,10 @@
+###v0.2.0
+___
+
+* Implement infinite scroll for nodes, subnodes and selected ([tricinel](http://github.com/tricinel))
+* Replace as.sortable with Sortable; Jumpstart infinite scroll ([tricinel](http://github.com/tricinel))
+* Replace default buttons with lodash _.defaults to extend ([tricinel](http://github.com/tricinel))
+
 ###v0.1.20
 ___
 
