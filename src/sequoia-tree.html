@@ -15,12 +15,10 @@
     </p>
   </div>
 
-  <ul data-ng-if="isEditing" id="sequoia-tree" class="sequoia-tree" data-as-sortable="{ containment: '#sequoia-tree', containerPositioning: 'relative' }" data-ng-model="tree.nodes">
-    <li data-ng-repeat="node in tree.nodes track by node[tree.template.id]" data-as-sortable-item data-ng-include="'sequoia-item.html'"></li>
-  </ul>
-
-  <ul data-ng-if="!isEditing" id="sequoia-tree" class="sequoia-tree">
-    <li data-ng-repeat="node in tree.nodes track by node[tree.template.id]" data-ng-include="'sequoia-item.html'"></li>
-  </ul>
+  <div data-infinite-scroll="loadMore()">
+    <ul id="sequoia-tree" class="sequoia-tree" data-ng-sortable="sortableOptions" data-ng-model="tree.nodes">
+      <li data-ng-repeat="node in tree.nodes track by node[tree.template.id]" data-ng-include="'sequoia-item.html'"></li>
+    </ul>
+  </div>
 
 </ng-form>
