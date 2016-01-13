@@ -100,7 +100,8 @@ You can impose a limit of many nodes you can select using `limit = 1`, which wou
 ##### Coming next
 
 * Better visualiser for long titles
-* Infinite scroll for the nodes on any level
+* Configurable node structure
+* Add/Remove functions passed from the client and just applied by the directive
 
 ##### License
 
