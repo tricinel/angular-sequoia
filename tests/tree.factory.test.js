@@ -145,10 +145,23 @@ describe('Sequoia Tree Factory', function() {
   });
 
   it('should create a new empty node', function() {
-    var tree = new SequoiaTree(nodes,template),
-        node = tree.newNode();
+    var tree = new SequoiaTree(nodes,template);
 
-    expect(node).toEqual({_id: node._id, title: '', nodes: []});
+    tree.setCurrentNodes(nodes);
+
+    var node = tree.addNode();
+
+    expect(nodes.length).toEqual(tree.currentNodes.length);
+  });
+
+  it('should remove an existing node', function() {
+    var tree = new SequoiaTree(nodes,template),
+        remove = nodes[0];
+
+    tree.setCurrentNodes(nodes);
+    tree.removeNode(remove);
+
+    expect(nodes.length).toEqual(tree.currentNodes.length + 1);
   });
 
 });

@@ -181,14 +181,19 @@
       return results;
     };
 
-    SequoiaTree.prototype.newNode = function() {
+    SequoiaTree.prototype.addNode = function() {
       var node = {};
 
       node[this.template.id] = _guid();
       node[this.template.title] = '';
       node[this.template.nodes] = [];
 
-      return node;
+      this.currentNodes.push(node);
+    };
+
+    SequoiaTree.prototype.removeNode = function(node) {
+      this.currentNodes = _.without(this.currentNodes, node);
+      this.nodes = _.without(this.nodes, node);
     };
 
     return SequoiaTree;

@@ -132,15 +132,15 @@
             scope.load(node);
           }
 
-          scope.tree.nodes.push(scope.tree.newNode());
+          scope.tree.addNode();
+          scope.tree.paginate();
+
           scope.isEditing = true;
         };
 
         scope.remove = function(node) {
-          var index = node ? _.indexOf(scope.tree.nodes, node) : -1;
-          if(index !== -1) {
-            scope.tree.nodes.splice(index, 1);
-          }
+          scope.tree.removeNode(node);
+          scope.tree.paginate();
         };
 
         scope.closeNotification = function() {
