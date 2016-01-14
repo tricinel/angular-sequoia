@@ -1,3 +1,8 @@
+###v0.2.1
+___
+
+* Move add and remove functions to the factory ([tricinel](http://github.com/tricinel))
+
 ###v0.2.0
 ___
 
