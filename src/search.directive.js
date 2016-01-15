@@ -10,7 +10,8 @@
       scope: {
         'tree': '=',
         'isSearching': '=',
-        'buttons': '='
+        'buttons': '=',
+        'isEditing': '='
       },
       link: function(scope) {
         scope.search = function() {

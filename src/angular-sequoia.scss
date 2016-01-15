@@ -131,6 +131,11 @@
       @media (min-width: $screen-sm) {
         width: 80%;
       }
+
+      input[type="text"]:disabled {
+        background-color: lighten($sequoia-gray, 40);
+        cursor: not-allowed;
+      }
     }
 
     .sequoia-actions {
