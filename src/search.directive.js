@@ -19,6 +19,7 @@
             scope.isSearching = scope.query ? true : false;
             scope.tree.setNodesInPath(scope.tree.nodes);
             scope.tree.setCurrentNodes(scope.tree.find(scope.tree.template.title, scope.query));
+            scope.tree.paginate();
           } else {
             scope.clear();
           }
@@ -28,6 +29,7 @@
           scope.query = '';
           scope.isSearching = false;
           scope.tree.setCurrentNodes(scope.tree.getNodesInPath());
+          scope.tree.paginate();
         };
       }
     };
