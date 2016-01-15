@@ -1,3 +1,9 @@
+###v0.2.2
+___
+
+* Update search directive to paginate ([tricinel](http://github.com/tricinel))
+* Disable searching when editing the tree ([tricinel](http://github.com/tricinel))
+
 ###v0.2.1
 ___
 
