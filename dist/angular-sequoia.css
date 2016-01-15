@@ -146,6 +146,9 @@
     @media (min-width: 786px) {
       .sequoia .sequoia-search .sequoia-search-form {
         width: 80%; } }
+    .sequoia .sequoia-search .sequoia-search-form input[type="text"]:disabled {
+      background-color: #ebeded;
+      cursor: not-allowed; }
   .sequoia .sequoia-search .sequoia-actions {
     display: block; }
     @media (min-width: 786px) {
