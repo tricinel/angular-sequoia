@@ -1,3 +1,10 @@
+###v0.2.3
+___
+
+* Fix tests by adding BUTTONS ([tricinel](http://github.com/tricinel))
+* Make Root wording customizable ([tricinel](http://github.com/tricinel))
+* Add deselect all button ([tricinel](http://github.com/tricinel))
+
 ###v0.2.2
 ___
 
