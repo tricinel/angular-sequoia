@@ -1,17 +1,18 @@
 (function() {
   'use strict';
 
-  function SequoiaTreeFactory($log, NODE_TEMPLATE) {
+  function SequoiaTreeFactory($log, NODE_TEMPLATE, BUTTONS) {
 
     var _checkNodeStructure, _exists, _contains, _buildBreadCrumbs, _buildPath, _selected, _createNodeWithFullPathAsTitle, _guid;
 
-    var SequoiaTree = function(tree, template) {
+    var SequoiaTree = function(tree, template, buttons) {
       this.template = template || NODE_TEMPLATE;
       this.tree = _checkNodeStructure(_.isArray(tree) ? tree[0] : {}, this.template) ? tree : [];
       this.pagination = {
         startkey: 0,
         limit: 20
       };
+      this.buttons = buttons || BUTTONS;
     };
 
     _guid = function() {
@@ -60,17 +61,17 @@
       return results;
     };
 
-    _buildBreadCrumbs = function(id, nodes, breadcrumbs, template) {
+    _buildBreadCrumbs = function(id, nodes, breadcrumbs, template, rootText) {
       nodes = nodes || [];
       var root = {};
-      root[template.title] = 'Root';
+      root[template.title] = rootText;
       breadcrumbs = !breadcrumbs.length ? [root] : breadcrumbs;
 
       for(var i=0;i<nodes.length;i++) {
         if(nodes[i][template.id] === id || _exists(nodes[i][template.nodes], template.id, id, template)) {
           breadcrumbs.push(nodes[i]);
         }
-        _buildBreadCrumbs(id, nodes[i][template.nodes], breadcrumbs, template);
+        _buildBreadCrumbs(id, nodes[i][template.nodes], breadcrumbs, template, rootText);
       }
 
       return breadcrumbs;
@@ -146,7 +147,7 @@
     };
 
     SequoiaTree.prototype.breadcrumbs = function(id) {
-      return _buildBreadCrumbs(id,this.tree,[], this.template);
+      return _buildBreadCrumbs(id,this.tree,[], this.template, this.buttons.root);
     };
 
     SequoiaTree.prototype.find = function(key,value) {
@@ -199,7 +200,7 @@
     return SequoiaTree;
   }
 
-  SequoiaTreeFactory.$inject = ['$log', 'NODE_TEMPLATE'];
+  SequoiaTreeFactory.$inject = ['$log', 'NODE_TEMPLATE', 'BUTTONS'];
 
   angular.module('ngSequoia')
     .factory('SequoiaTree', SequoiaTreeFactory);

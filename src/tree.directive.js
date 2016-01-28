@@ -23,9 +23,9 @@
           scope.isMultiSelect = scope.options.limit === 1 ? false : true;
           scope.model = scope.isMultiSelect ? _.isArray(scope.model) ? scope.model : [] : _.isString(scope.model) ? scope.model : '';
           scope.breadcrumbs = [];
-          scope.tree = new Tree(angular.copy(scope.treeNodes), scope.template);
           scope.buttons = _.defaults(scope.options.buttons, BUTTONS);
           scope.sortableOptions = SORTABLE_OPTIONS;
+          scope.tree = new Tree(angular.copy(scope.treeNodes), scope.template, scope.buttons);
         }
 
         scope.load = function(node) {
@@ -97,7 +97,7 @@
 
         scope.$watch('treeNodes', function(newVal) {
           if(newVal) {
-            scope.tree = new Tree(angular.copy(scope.treeNodes), scope.template);
+            scope.tree = new Tree(angular.copy(scope.treeNodes), scope.template, scope.buttons);
             scope.load();
           }
         }, true);

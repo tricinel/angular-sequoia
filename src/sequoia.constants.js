@@ -2,6 +2,7 @@
   'use strict';
 
   var buttons = {
+    root: 'Home',
     edit: 'Edit',
     select: 'Select',
     deselect: 'Deselect',
