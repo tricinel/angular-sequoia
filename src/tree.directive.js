@@ -71,6 +71,10 @@
 
         };
 
+        scope.deselectAll = function() {
+          scope.model = scope.isMultiSelect ? [] : '';
+        };
+
         scope.isSelected = function(node) {
           return scope.isMultiSelect ? _.indexOf(scope.model, node[scope.tree.template.id]) !== -1 ? true : false : scope.model === node[scope.tree.template.id];
         };

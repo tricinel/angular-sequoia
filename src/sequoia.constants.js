@@ -14,6 +14,7 @@
     searchClear: '&times;',
     showSelected: 'Show selected',
     hideSelected: 'Hide selected',
+    deselectAll: 'Deselect all',
     backToList: 'Back to list',
     move: 'Move',
     modalSelect: 'Select'
