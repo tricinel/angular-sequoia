@@ -17,12 +17,14 @@ describe('Sequoia Tree Factory', function() {
 
   var SequoiaTree,
       log,
-      NODE_TEMPLATE;
+      NODE_TEMPLATE,
+      BUTTONS;
 
-  beforeEach(inject(function(_SequoiaTree_, _$log_, _NODE_TEMPLATE_){
+  beforeEach(inject(function(_SequoiaTree_, _$log_, _NODE_TEMPLATE_, _BUTTONS_){
     SequoiaTree = _SequoiaTree_;
     log = _$log_;
     NODE_TEMPLATE = _NODE_TEMPLATE_;
+    BUTTONS = _BUTTONS_;
   }));
 
   it('should create a new tree', function() {
@@ -108,7 +110,7 @@ describe('Sequoia Tree Factory', function() {
 
   it('create breadcrumbs', function() {
     var tree = new SequoiaTree(nodes,template),
-        breadcrumbs = [{ title: 'Root' },{ _id: '9012', title: 'Title three', nodes: [{ _id: '3456', title: 'Subtitle one', nodes: []}, { _id: '7890', title: 'Subtitle two', nodes: [{ _id: '12345', title: 'Subsubtitle one', nodes: []}]}]}, { _id: '7890', title: 'Subtitle two', nodes: [{ _id: '12345', title: 'Subsubtitle one', nodes: []}]}, { _id: '12345', title: 'Subsubtitle one', nodes: []}];
+        breadcrumbs = [{ title: BUTTONS.root },{ _id: '9012', title: 'Title three', nodes: [{ _id: '3456', title: 'Subtitle one', nodes: []}, { _id: '7890', title: 'Subtitle two', nodes: [{ _id: '12345', title: 'Subsubtitle one', nodes: []}]}]}, { _id: '7890', title: 'Subtitle two', nodes: [{ _id: '12345', title: 'Subsubtitle one', nodes: []}]}, { _id: '12345', title: 'Subsubtitle one', nodes: []}];
 
     expect(tree.breadcrumbs('12345')).toEqual(breadcrumbs);
   });
