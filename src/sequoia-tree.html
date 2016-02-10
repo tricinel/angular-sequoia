@@ -17,7 +17,7 @@
 
   <div data-infinite-scroll="loadMore()">
     <ul id="sequoia-tree" class="sequoia-tree" data-ng-sortable="sortableOptions" data-ng-model="tree.nodes">
-      <li data-ng-repeat="node in tree.nodes track by node[tree.template.id]" data-ng-include="'sequoia-item.html'"></li>
+      <li class="sequoia-animate-repeat" data-ng-repeat="node in tree.nodes track by node[tree.template.id]" data-ng-include="'sequoia-item.html'"></li>
     </ul>
   </div>
 
