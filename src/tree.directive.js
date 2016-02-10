@@ -9,9 +9,10 @@
       templateUrl: 'angular-sequoia.html',
       scope: {
         'treeNodes': '=sequoiaTree',
-        'model': '=ngModel',
-        'template': '=nodeTemplate',
-        'options': '='
+        'model': '=?ngModel',
+        'template': '=?nodeTemplate',
+        'options': '=?',
+        'path': '=?sequoiaTreePath'
       },
       link: function(scope) {
         function init() {
@@ -30,9 +31,13 @@
 
         scope.load = function(node) {
           scope.onlySelected = false;
-          if(scope.tree.isValidNode(node)) {
-            scope.tree.setCurrentNodes(node[scope.tree.template.nodes]);
-            scope.breadcrumbs = scope.tree.breadcrumbs(node[scope.tree.template.id]);
+
+          var n = node ? node : scope.path ? scope.path : null;
+
+          if(scope.tree.isValidNode(n)) {
+            scope.tree.setCurrentNodes(n[scope.tree.template.nodes]);
+            scope.breadcrumbs = scope.tree.breadcrumbs(n[scope.tree.template.id]);
+            scope.path = n;
           } else {
             scope.tree.setCurrentNodes();
             scope.breadcrumbs = [];

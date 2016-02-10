@@ -12,6 +12,7 @@ module.exports = function(config) {
       'bower_components/Sortable/Sortable.js',
       'bower_components/Sortable/ng-sortable.js',
       'bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js',
+      'bower_components/angular-animate/angular-animate.js',
       'src/**/*.js',
       'tests/**/*.js'
     ],
