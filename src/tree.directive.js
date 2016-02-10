@@ -9,10 +9,10 @@
       templateUrl: 'angular-sequoia.html',
       scope: {
         'treeNodes': '=sequoiaTree',
-        'model': '=ngModel',
-        'template': '=nodeTemplate',
-        'options': '=',
-        'path': '=sequoiaTreePath'
+        'model': '=?ngModel',
+        'template': '=?nodeTemplate',
+        'options': '=?',
+        'path': '=?sequoiaTreePath'
       },
       link: function(scope) {
         function init() {
