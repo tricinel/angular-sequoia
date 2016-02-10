@@ -101,7 +101,6 @@ You can set a start path for the tree, so that it begins displaying with that no
 
 ##### Coming next
 
-* Better visualiser for long titles
 * Configurable node structure
 * Add/Remove functions passed from the client and just applied by the directive
 
