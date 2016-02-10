@@ -128,6 +128,11 @@ function MainController($timeout) {
     vm.treeInfiniteScroll[0].nodes.push({_id: _.uniqueId('generated_subitem_'), title: 'Subgenerated title ' + j});
   }
 
+  //Tree with a set path
+  vm.treeSetPath = angular.copy(tree);
+  vm.nodeForPath = {_id: '0000000000', title: 'Set path', nodes: [{ _id: _.uniqueId(), title: 'Sub set path'}]};
+  vm.treeSetPath.push(vm.nodeForPath);
+
 }
 
 MainController.$inject = ['$timeout'];
