@@ -77,15 +77,15 @@
       return breadcrumbs;
     };
 
-    _buildPath = function(node, nodes, path, template) {
+    _buildPath = function(node, nodes, path, template, rootText) {
       nodes = nodes || [];
 
       for(var i=0;i<nodes.length;i++) {
         if(nodes[i][template.id] === node[template.id] || _exists(nodes[i][template.nodes], template.id, node[template.id], template)) {
-          path += path.length ? ' > ' : '';
-          path += _.trunc(nodes[i][template.title], 20);
+          path += path.length ? ' » ' : 'Full path: ' + rootText + ' » ';
+          path += nodes[i][template.title];
         }
-        path = _buildPath(node, nodes[i][template.nodes], path, template);
+        path = _buildPath(node, nodes[i][template.nodes], path, template, rootText);
       }
 
       return path;
@@ -104,16 +104,22 @@
       return selected;
     };
 
-    _createNodeWithFullPathAsTitle = function(node, tree, template) {
+    _createNodeWithFullPathAsTitle = function(node, tree, template, rootText) {
       var result = {};
 
       result[template.id] = node[template.id];
-      result[template.title] = _buildPath(node, tree, '', template);
+      result[template.title] = node[template.title];
+      /* This is a bit hacky, will fix */
+      result.fullpath = '<span class="help-text mute">' + _buildPath(node, tree, '', template, rootText) + '</span>';
       if(_.isArray(node[template.nodes]) && node[template.nodes].length > 0) {
         result[template.nodes] = node[template.nodes];
       }
 
       return result;
+    };
+
+    SequoiaTree.prototype.buildPathToNode = function(node) {
+      return _buildPath(node, this.tree, '', this.template, this.buttons.root);
     };
 
     SequoiaTree.prototype.paginate = function() {
@@ -154,7 +160,7 @@
       var results = [],
           found = _contains(this.tree, key, value, [], this.template);
       for(var i=0;i<found.length;i++) {
-        results.push(_createNodeWithFullPathAsTitle(found[i], this.tree,this.template));
+        results.push(_createNodeWithFullPathAsTitle(found[i], this.tree,this.template, this.buttons.root));
       }
 
       return results;
@@ -170,11 +176,11 @@
         }
 
         for(var j=0;j<selected.length;j++) {
-          results.push(_createNodeWithFullPathAsTitle(selected[j], this.tree,this.template));
+          results.push(_createNodeWithFullPathAsTitle(selected[j], this.tree,this.template, this.buttons.root));
         }
       } else if(_.isString(obj)) {
         selected = _selected(obj, this.tree, [], this.template);
-        results.push(_createNodeWithFullPathAsTitle(selected[0], this.tree, this.template));
+        results.push(_createNodeWithFullPathAsTitle(selected[0], this.tree, this.template, this.buttons.root));
       } else {
         $log.warn('You must pass an array of IDs or a single ID in order to find the selected nodes!');
       }

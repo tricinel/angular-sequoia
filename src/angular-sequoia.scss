@@ -250,6 +250,10 @@
     &.has-error {
       color: $sequoia-danger;
     }
+
+    .mute {
+      color: lighten($sequoia-gray, 10);
+    }
   }
 
   .as-sortable-dragging {

@@ -117,11 +117,10 @@ describe('Sequoia Tree Factory', function() {
 
   it('should build the correct path to a node', function() {
     var tree = new SequoiaTree(nodes,template),
-        path = 'Title three > Subtitle two > Subsubtitle one',
-        found = tree.findSelected(['12345']);
+        testPath = 'Full path: ' + BUTTONS.root + ' » Title three » Subtitle two » Subsubtitle one',
+        path = tree.buildPathToNode({ _id: '12345', title: 'Subsubtitle one', nodes: [] });
 
-    expect(found.length).toBe(1);
-    expect(found[0].title).toBe(path);
+    expect(testPath).toEqual(path);
   });
 
   it('should retrieve the path to a single node passed as a string', function() {
