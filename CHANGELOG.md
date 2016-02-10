@@ -1,3 +1,11 @@
+###v0.2.4
+___
+
+* Make directive scope binding optional for some values ([tricinel](http://github.com/tricinel))
+* Improve long node names by adding a full path to it in the search and selected views ([tricinel](http://github.com/tricinel))
+* Add angular-animate and styles for ngRepeat for tree nodes ([tricinel](http://github.com/tricinel))
+* Add set path so that you can set where the tree should start displaying from ([tricinel](http://github.com/tricinel))
+
 ###v0.2.3
 ___
 
