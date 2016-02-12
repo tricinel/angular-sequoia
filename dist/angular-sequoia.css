@@ -52,6 +52,8 @@
   /**
    * Animations
    */ }
+  .sequoia .sequoia-up-one-level {
+    padding: 5px 10px; }
   .sequoia .sequoia-modal-container {
     position: relative;
     height: 100%;
