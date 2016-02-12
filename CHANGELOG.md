@@ -1,3 +1,8 @@
+###v0.2.5
+___
+
+* Add button for Up a level ([tricinel](http://github.com/tricinel))
+
 ###v0.2.4
 ___
 
