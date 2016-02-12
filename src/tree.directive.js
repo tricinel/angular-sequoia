@@ -38,9 +38,11 @@
             scope.tree.setCurrentNodes(n[scope.tree.template.nodes]);
             scope.breadcrumbs = scope.tree.breadcrumbs(n[scope.tree.template.id]);
             scope.path = n;
+            scope.parentNode = scope.tree.findParentNode(scope.breadcrumbs);
           } else {
             scope.tree.setCurrentNodes();
             scope.breadcrumbs = [];
+            scope.parentNode = null;
           }
 
           scope.tree.paginate();

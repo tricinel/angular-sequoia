@@ -115,6 +115,14 @@ describe('Sequoia Tree Factory', function() {
     expect(tree.breadcrumbs('12345')).toEqual(breadcrumbs);
   });
 
+  it('should get the parent node', function() {
+    var tree = new SequoiaTree(nodes,template),
+        path = [{ _id: '9012', title: 'Title', nodes: [] }, { _id: '90122', title: 'Title two', nodes: [] }, { _id: '90123', title: 'Title three', nodes: [] }],
+        node = { _id: '90122', title: 'Title two', nodes: [] };
+
+    expect(tree.findParentNode(path)).toEqual(node);
+  });
+
   it('should build the correct path to a node', function() {
     var tree = new SequoiaTree(nodes,template),
         testPath = 'Full path: ' + BUTTONS.root + ' » Title three » Subtitle two » Subsubtitle one',

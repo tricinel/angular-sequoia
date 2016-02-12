@@ -3,7 +3,7 @@
 
   function SequoiaTreeFactory($log, NODE_TEMPLATE, BUTTONS) {
 
-    var _checkNodeStructure, _exists, _contains, _buildBreadCrumbs, _buildPath, _selected, _createNodeWithFullPathAsTitle, _guid;
+    var _checkNodeStructure, _exists, _contains, _buildBreadCrumbs, _buildPath, _selected, _createNodeWithFullPathAsTitle, _guid, _getParentNode;
 
     var SequoiaTree = function(tree, template, buttons) {
       this.template = template || NODE_TEMPLATE;
@@ -104,6 +104,21 @@
       return selected;
     };
 
+    _getParentNode = function(id, nodes, template, breadcrumbs) {
+      nodes = nodes || [];
+
+      breadcrumbs = breadcrumbs || [];
+
+      for(var i=0;i<nodes.length;i++) {
+        if(nodes[i][template.id] === id || _exists(nodes[i][template.nodes], template.id, id, template)) {
+          breadcrumbs.push(nodes[i]);
+        }
+        _getParentNode(id, nodes[i][template.nodes], template, breadcrumbs);
+      }
+
+      return breadcrumbs;
+    };
+
     _createNodeWithFullPathAsTitle = function(node, tree, template, rootText) {
       var result = {};
 
@@ -116,6 +131,10 @@
       }
 
       return result;
+    };
+
+    SequoiaTree.prototype.findParentNode = function(path) {
+      return _.last(_.dropRight(path));
     };
 
     SequoiaTree.prototype.buildPathToNode = function(node) {
