@@ -1,3 +1,9 @@
+###v0.2.6
+___
+
+* Only show the modal if needed ([tricinel](http://github.com/tricinel))
+* Add some one time binding where possible to limit the number of watchers ([tricinel](http://github.com/tricinel))
+
 ###v0.2.5
 ___
 
