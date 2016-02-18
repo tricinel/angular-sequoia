@@ -133,6 +133,17 @@ function MainController($timeout) {
   vm.nodeForPath = {_id: '0000000000', title: 'Set path', nodes: [{ _id: _.uniqueId(), title: 'Sub set path'}]};
   vm.treeSetPath.push(vm.nodeForPath);
 
+  //Huge tree
+  vm.treeHuge = angular.copy(tree);
+  for(var i=0;i<10000;i++) {
+    vm.treeHuge.push({_id: _.uniqueId('generated_'), title: 'Generated title ' + i});
+  }
+  for(var j=0;j<1000;j++) {
+    vm.treeHuge[0].nodes.push({_id: _.uniqueId('generated_subitem_'), title: 'Subgenerated title ' + j});
+    vm.treeHuge[1].nodes.push({_id: _.uniqueId('generated_subitem_'), title: 'Subgenerated title ' + j});
+    vm.treeHuge[2].nodes.push({_id: _.uniqueId('generated_subitem_'), title: 'Subgenerated title ' + j});
+  }
+
 }
 
 MainController.$inject = ['$timeout'];
