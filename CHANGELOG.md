@@ -1,3 +1,9 @@
+###v0.2.7
+___
+
+* Change watch to watchCollection ([tricinel](http://github.com/tricinel))
+* Add path watcher ([tricinel](http://github.com/tricinel))
+
 ###v0.2.6
 ___
 
