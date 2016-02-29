@@ -144,6 +144,7 @@
             scope.tree.setCurrentNodes();
             scope.breadcrumbs = [];
             scope.parentNode = null;
+            scope.path = null;
           }
 
           scope.tree.paginate();
@@ -203,12 +204,18 @@
 
         init();
 
-        scope.$watch('treeNodes', function(newVal) {
+        scope.$watchCollection('treeNodes', function(newVal) {
           if(newVal) {
             scope.tree = new Tree(angular.copy(scope.treeNodes), scope.template, scope.buttons);
             scope.load();
           }
-        }, true);
+        });
+
+        scope.$watchCollection('path', function(newVal) {
+          if(newVal) {
+            scope.load();
+          }
+        });
 
         if(!scope.inline) {
           scope.load();
