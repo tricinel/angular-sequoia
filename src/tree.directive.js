@@ -103,7 +103,7 @@
 
         init();
 
-        scope.$watch('treeNodes', function(newVal) {
+        scope.$watchCollection('treeNodes', function(newVal) {
           if(newVal) {
             scope.tree = new Tree(angular.copy(scope.treeNodes), scope.template, scope.buttons);
             scope.load();
