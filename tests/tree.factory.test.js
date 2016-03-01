@@ -70,18 +70,44 @@ describe('Sequoia Tree Factory', function() {
   });
 
   it('should paginate', function() {
-    var tree, i;
+    var tree, i, _nodes = [];
+
+    _nodes = nodes.concat([0]);
 
     for(i=0;i<25;i++) {
-      nodes.push({_id: 'generated_' + i, title: 'Generated title ' + i});
+      _nodes.push({_id: 'generated_' + i, title: 'Generated title ' + i, nodes: []});
     }
+
+    tree = new SequoiaTree(_nodes,template);
+
+    tree.setCurrentNodes();
+    tree.paginate();
+    expect(tree.currentNodes.length).toEqual(_nodes.length);
+    expect(tree.nodes.length).toEqual(tree.pagination.limit);
+  });
+
+  it('should not finish pagination', function() {
+    var tree, i, _nodes = [];
+
+    for(i=0;i<25;i++) {
+      _nodes.push({_id: 'generated_' + i, title: 'Generated title ' + i, nodes: []});
+    }
+
+    tree = new SequoiaTree(_nodes,template);
+
+    tree.setCurrentNodes();
+    tree.paginate();
+    expect(tree.pagination.finished).toBe(false);
+  });
+
+  it('should finish pagination', function() {
+    var tree;
 
     tree = new SequoiaTree(nodes,template);
 
     tree.setCurrentNodes();
     tree.paginate();
-    expect(tree.currentNodes.length).toEqual(nodes.length);
-    expect(tree.nodes.length).toEqual(tree.pagination.limit);
+    expect(tree.pagination.finished).toBe(true);
   });
 
   it('should set the current nodes to passed nodes', function() {

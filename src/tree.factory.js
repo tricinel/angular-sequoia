@@ -10,7 +10,8 @@
       this.tree = _checkNodeStructure(_.isArray(tree) ? tree[0] : {}, this.template) ? tree : [];
       this.pagination = {
         startkey: 0,
-        limit: 20
+        limit: 20,
+        finished: false
       };
       this.buttons = buttons || BUTTONS;
     };
@@ -149,8 +150,14 @@
 
       //set the new startkey
       this.pagination.startkey = _.indexOf(this.currentNodes, _.last(append));
+
       //set the new nodes
       this.nodes = _.union(this.nodes, append);
+
+      //have we reached the end of the array?
+      if(this.nodes.length === this.tree.length) {
+        this.pagination.finished = true;
+      }
     };
 
     SequoiaTree.prototype.setCurrentNodes = function(nodes) {

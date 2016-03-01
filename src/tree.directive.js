@@ -29,6 +29,11 @@
           scope.tree = new Tree(angular.copy(scope.treeNodes), scope.template, scope.buttons);
         }
 
+        function paginate() {
+          scope.tree.paginate();
+          scope.finished = scope.tree.pagination.finished;
+        }
+
         scope.load = function(node) {
           scope.onlySelected = false;
 
@@ -46,11 +51,11 @@
             scope.path = null;
           }
 
-          scope.tree.paginate();
+          paginate();
         };
 
         scope.loadMore = function() {
-          scope.tree.paginate();
+          paginate();
         };
 
         scope.select = function(node) {
@@ -98,7 +103,7 @@
             scope.tree.setCurrentNodes(selected);
           }
 
-          scope.tree.paginate();
+          paginate();
         };
 
         init();
@@ -151,14 +156,14 @@
           }
 
           scope.tree.addNode();
-          scope.tree.paginate();
+          paginate();
 
           scope.isEditing = true;
         };
 
         scope.remove = function(node) {
           scope.tree.removeNode(node);
-          scope.tree.paginate();
+          paginate();
         };
 
         scope.closeNotification = function() {
