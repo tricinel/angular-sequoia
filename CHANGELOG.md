@@ -1,3 +1,8 @@
+###v0.2.8
+___
+
+* Add finished for infinite scroll ([tricinel](http://github.com/tricinel))
+
 ###v0.2.7
 ___
 
