@@ -1,3 +1,9 @@
+###v0.2.9
+___
+
+* Hide Up button when the user is searching ([tricinel](http://github.com/tricinel))
+* Remove angular.copy tree nodes ([tricinel](http://github.com/tricinel))
+
 ###v0.2.8
 ___
 
