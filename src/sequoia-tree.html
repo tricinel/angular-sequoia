@@ -8,7 +8,7 @@
 
   <ul data-ng-if="!searchEnabled && !onlySelected" class="sequoia-breadcrumbs" data-ng-include="'sequoia-breadcrumbs.html'"></ul>
 
-  <p class="sequoia-up-one-level" data-ng-if="parentNode">
+  <p class="sequoia-up-one-level" data-ng-if="parentNode && !searchEnabled">
     <a href="" class="sequoia-button sequoia-button-info" data-ng-click="load(parentNode)" data-ng-bind-html="buttons.up"></a>
   </p>
 

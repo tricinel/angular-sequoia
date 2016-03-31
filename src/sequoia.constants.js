@@ -19,7 +19,8 @@
     backToList: 'Back to list',
     move: 'Move',
     modalSelect: 'Select',
-    up: 'Up a level'
+    up: 'Up a level',
+    searchText: 'Search for an item by title'
   };
 
   var nodeTemplate = {

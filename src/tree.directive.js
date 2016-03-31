@@ -26,7 +26,7 @@
           scope.breadcrumbs = [];
           scope.buttons = _.defaults(scope.options.buttons, BUTTONS);
           scope.sortableOptions = SORTABLE_OPTIONS;
-          scope.tree = new Tree(angular.copy(scope.treeNodes), scope.template, scope.buttons);
+          scope.tree = new Tree(scope.treeNodes, scope.template, scope.buttons);
         }
 
         function paginate() {
@@ -110,7 +110,7 @@
 
         scope.$watchCollection('treeNodes', function(newVal) {
           if(newVal) {
-            scope.tree = new Tree(angular.copy(scope.treeNodes), scope.template, scope.buttons);
+            scope.tree = new Tree(scope.treeNodes, scope.template, scope.buttons);
             scope.load();
           }
         });
@@ -145,7 +145,7 @@
             return;
           }
 
-          scope.treeNodes = angular.copy(scope.tree.tree);
+          scope.treeNodes = scope.tree.tree;
 
           scope.isEditing = !scope.isEditing;
         };
