@@ -1,3 +1,8 @@
+###v0.2.10
+___
+
+* Make search form optional, enabled by default ([tricinel](http://github.com/tricinel))
+
 ###v0.2.9
 ___
 
