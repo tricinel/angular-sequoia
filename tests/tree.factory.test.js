@@ -191,12 +191,12 @@ describe('Sequoia Tree Factory', function() {
 
   it('should remove an existing node', function() {
     var tree = new SequoiaTree(nodes,template),
-        remove = nodes[0];
+        remove = nodes[0],
+        initialLength = tree.tree.length;
 
-    tree.setCurrentNodes(nodes);
     tree.removeNode(remove);
 
-    expect(nodes.length).toEqual(tree.currentNodes.length + 1);
+    expect(initialLength).toEqual(tree.tree.length + 1);
   });
 
 });

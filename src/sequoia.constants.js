@@ -31,7 +31,7 @@
 
   var defaultOptions = {
     allowSelect: true,
-    allowSearch: false,
+    allowSearch: true,
     canEdit: false,
     inline: false,
     buttons: {},
