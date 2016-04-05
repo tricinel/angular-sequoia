@@ -80,7 +80,7 @@
 
   var defaultOptions = {
     allowSelect: true,
-    allowSearch: false,
+    allowSearch: true,
     canEdit: false,
     inline: false,
     buttons: {},
@@ -288,7 +288,7 @@
 
   function SequoiaTreeFactory($log, NODE_TEMPLATE, BUTTONS) {
 
-    var _checkNodeStructure, _exists, _contains, _buildBreadCrumbs, _buildPath, _selected, _createNodeWithFullPathAsTitle, _guid, _getParentNode;
+    var _checkNodeStructure, _exists, _contains, _buildBreadCrumbs, _buildPath, _selected, _createNodeWithFullPathAsTitle, _guid, _getParentNode, _pruneTree;
 
     var SequoiaTree = function(tree, template, buttons) {
       this.template = template || NODE_TEMPLATE;
@@ -419,6 +419,24 @@
       return result;
     };
 
+    _pruneTree = function(nodes, id, template) {
+      for (var i=0;i<nodes.length;i++) {
+        var node = nodes[i];
+        if (node[template.id] === id) {
+          nodes.splice(i, 1);
+          return nodes;
+        }
+        if (node[template.nodes]) {
+          if (_pruneTree(node[template.nodes], id, template)) {
+            if (node[template.nodes].length === 0) {
+              delete node[template.nodes];
+            }
+            return nodes;
+          }
+        }
+      }
+    };
+
     SequoiaTree.prototype.findParentNode = function(path) {
       return _.last(_.dropRight(path));
     };
@@ -510,8 +528,11 @@
     };
 
     SequoiaTree.prototype.removeNode = function(node) {
+      //remove node from nodes currently visible
       this.currentNodes = _.without(this.currentNodes, node);
       this.nodes = _.without(this.nodes, node);
+      //remove node from the tree, search recursively
+      this.tree = _pruneTree(this.tree, node[this.template.id], this.template);
     };
 
     return SequoiaTree;
