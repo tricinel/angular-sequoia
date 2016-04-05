@@ -1,3 +1,8 @@
+###v0.2.12
+___
+
+* Fix sorting not being saved ([tricinel](http://github.com/tricinel))
+
 ###v0.2.11
 ___
 
