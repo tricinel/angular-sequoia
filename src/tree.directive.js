@@ -25,8 +25,12 @@
           scope.model = scope.isMultiSelect ? _.isArray(scope.model) ? scope.model : [] : _.isString(scope.model) ? scope.model : '';
           scope.breadcrumbs = [];
           scope.buttons = _.defaults(scope.options.buttons, BUTTONS);
-          scope.sortableOptions = SORTABLE_OPTIONS;
+          scope.sortableOptions = _.assign({}, SORTABLE_OPTIONS, {onSort: handleSort});
           scope.tree = new Tree(scope.treeNodes, scope.template, scope.buttons);
+        }
+
+        function handleSort(evt) {
+          scope.treeNodes = evt.models;
         }
 
         function paginate() {
