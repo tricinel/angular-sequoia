@@ -1,3 +1,9 @@
+###v0.2.11
+___
+
+* Fix removeNode not removing from tree, only from currentNodes on screen ([tricinel](http://github.com/tricinel))
+* Make allowSearch default to true ([tricinel](http://github.com/tricinel))
+
 ###v0.2.10
 ___
 
