@@ -56,6 +56,7 @@
           }
 
           paginate();
+          scope.$emit('nodes:updated');
         };
 
         scope.loadMore = function() {
