@@ -1,3 +1,8 @@
+###v0.2.13
+___
+
+* Add infinite-scroll distance and listen for event to check if the nodes should update when navigating the tree ([tricinel](http://github.com/tricinel))
+
 ###v0.2.12
 ___
 
