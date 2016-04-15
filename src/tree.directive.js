@@ -55,6 +55,7 @@
             scope.path = null;
           }
 
+          scope.tree.resetPagination();
           paginate();
           scope.$emit('nodes:updated');
         };
