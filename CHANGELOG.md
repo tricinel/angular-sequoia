@@ -1,3 +1,11 @@
+###v0.2.14
+___
+
+* Make use of the new reset parameter for infinite scroll ([tricinel](http://github.com/tricinel))
+* Add call to reset pagination when loading a new node ([tricinel](http://github.com/tricinel))
+* Add pagination reset function ([tricinel](http://github.com/tricinel))
+* Temporarily move ngInfinitScroll to personal branch ([tricinel](http://github.com/tricinel))
+
 ###v0.2.13
 ___
 
