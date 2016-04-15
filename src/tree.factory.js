@@ -8,12 +8,10 @@
     var SequoiaTree = function(tree, template, buttons) {
       this.template = template || NODE_TEMPLATE;
       this.tree = _checkNodeStructure(_.isArray(tree) ? tree[0] : {}, this.template) ? tree : [];
-      this.pagination = {
-        startkey: 0,
-        limit: 20,
-        finished: false
-      };
+      this.pagination = {};
       this.buttons = buttons || BUTTONS;
+
+      this.resetPagination();
     };
 
     _guid = function() {
@@ -173,9 +171,17 @@
       this.nodes = _.union(this.nodes, append);
 
       //have we reached the end of the array?
-      if(this.nodes.length === this.tree.length) {
+      if(this.nodes.length === this.currentNodes.length) {
         this.pagination.finished = true;
       }
+    };
+
+    SequoiaTree.prototype.resetPagination = function() {
+      this.pagination = {
+        startkey: 0,
+        limit: 20,
+        finished: false
+      };
     };
 
     SequoiaTree.prototype.setCurrentNodes = function(nodes) {
