@@ -1,3 +1,9 @@
+###v0.2.15
+___
+
+* Fix infinite scroll for modals ([tricinel](http://github.com/tricinel))
+* Remove height-related styles from modal ([tricinel](http://github.com/tricinel))
+
 ###v0.2.14
 ___
 
