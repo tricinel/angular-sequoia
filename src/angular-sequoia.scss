@@ -52,11 +52,8 @@
       border: 1px solid lighten($sequoia-gray, 40);
       border-radius: 3px;
       box-shadow: 0 1px 1px 0 rgba(0,0,0,.12),0 1px 1px 0 rgba(0,0,0,.12);
-      height: auto;
       left: 5%;
       margin-left: -2.5%;
-      max-height: 480px;
-      overflow-y: auto;
       position: fixed;
       width: 90%;
       z-index: 6;
@@ -67,18 +64,6 @@
         margin-left: -380px;
         margin-top: -260px;
         width: 640px;
-        height: 480px;
-      }
-
-      &::-webkit-scrollbar {
-        width: 6px;
-        background-color: lighten($sequoia-info, 40);
-        border-radius: $border-radius;
-      }
-
-      &::-webkit-scrollbar-thumb {
-        background-color: lighten($sequoia-info, 30);
-        border-radius: $border-radius;
       }
     }
   }

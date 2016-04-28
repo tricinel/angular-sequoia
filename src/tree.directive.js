@@ -27,6 +27,8 @@
           scope.buttons = _.defaults(scope.options.buttons, BUTTONS);
           scope.sortableOptions = _.assign({}, SORTABLE_OPTIONS, {onSort: handleSort});
           scope.tree = new Tree(scope.treeNodes, scope.template, scope.buttons);
+
+          scope.containerStyle = !scope.inline ? { 'overflow': 'scroll', 'max-height': '400px' } : {};
         }
 
         function handleSort(evt) {
@@ -127,9 +129,9 @@
           }
         });
 
-        if(!scope.inline) {
+        // if(!scope.inline) {
           scope.load();
-        }
+        // }
 
         /* Handle Modal */
         scope.showModal = function() {

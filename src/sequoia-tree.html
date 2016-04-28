@@ -19,10 +19,12 @@
     </p>
   </div>
 
-  <div data-infinite-scroll="loadMore()" data-infinite-scroll-disabled="finished" data-infinite-scroll-listen-for-event="nodes:updated" data-infinite-scroll-reset="true">
-    <ul id="sequoia-tree" class="sequoia-tree" data-ng-sortable="sortableOptions" data-ng-model="tree.nodes">
-      <li class="sequoia-animate-repeat" data-ng-repeat="node in tree.nodes track by node[tree.template.id]" data-ng-include="'sequoia-item.html'"></li>
-    </ul>
+  <div data-ng-style="containerStyle">
+    <div data-infinite-scroll="loadMore()" data-infinite-scroll-disabled="finished" data-infinite-scroll-listen-for-event="nodes:updated" data-infinite-scroll-reset="true" data-ng-attr-data-infinite-scroll-parent="{{!inline || undefined}}">
+      <ul id="sequoia-tree" class="sequoia-tree" data-ng-sortable="sortableOptions" data-ng-model="tree.nodes">
+        <li class="sequoia-animate-repeat" data-ng-repeat="node in tree.nodes track by node[tree.template.id]" data-ng-include="'sequoia-item.html'"></li>
+      </ul>
+    </div>
   </div>
 
 </ng-form>
