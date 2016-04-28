@@ -84,11 +84,8 @@
       border: 1px solid #ebeded;
       border-radius: 3px;
       box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12), 0 1px 1px 0 rgba(0, 0, 0, 0.12);
-      height: auto;
       left: 5%;
       margin-left: -2.5%;
-      max-height: 480px;
-      overflow-y: auto;
       position: fixed;
       width: 90%;
       z-index: 6; }
@@ -98,15 +95,7 @@
           top: 50%;
           margin-left: -380px;
           margin-top: -260px;
-          width: 640px;
-          height: 480px; } }
-      .sequoia .sequoia-modal-container .sequoia-modal::-webkit-scrollbar {
-        width: 6px;
-        background-color: #e1f0fa;
-        border-radius: 4px; }
-      .sequoia .sequoia-modal-container .sequoia-modal::-webkit-scrollbar-thumb {
-        background-color: #b6daf2;
-        border-radius: 4px; }
+          width: 640px; } }
   .sequoia .sequoia-notification {
     text-align: center;
     width: 100%; }
