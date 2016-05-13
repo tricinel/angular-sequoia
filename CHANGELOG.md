@@ -1,3 +1,8 @@
+###v0.2.16
+___
+
+* Fix issue when model can become undefined after the tree has been initialised ([tricinel](http://github.com/tricinel))
+
 ###v0.2.15
 ___
 
