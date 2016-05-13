@@ -15,6 +15,10 @@
         'path': '=?sequoiaTreePath'
       },
       link: function(scope) {
+        function initialiseModel() {
+          scope.model = scope.isMultiSelect ? _.isArray(scope.model) ? scope.model : [] : _.isString(scope.model) ? scope.model : '';
+        }
+
         function init() {
           /* Set the default options*/
           scope.options = _.defaults(scope.options || {}, DEFAULT_OPTIONS);
@@ -22,11 +26,12 @@
           scope.inline = scope.options.inline;
           scope.allowSelect = scope.options.allowSelect;
           scope.isMultiSelect = scope.options.limit === 1 ? false : true;
-          scope.model = scope.isMultiSelect ? _.isArray(scope.model) ? scope.model : [] : _.isString(scope.model) ? scope.model : '';
           scope.breadcrumbs = [];
           scope.buttons = _.defaults(scope.options.buttons, BUTTONS);
           scope.sortableOptions = _.assign({}, SORTABLE_OPTIONS, {onSort: handleSort});
           scope.tree = new Tree(scope.treeNodes, scope.template, scope.buttons);
+
+          initialiseModel();
 
           scope.containerStyle = !scope.inline ? { 'overflow': 'scroll', 'max-height': '400px' } : {};
         }
@@ -67,6 +72,11 @@
         };
 
         scope.select = function(node) {
+          //make sure that scope.model is setup
+          if(_.isUndefined(scope.model)) {
+            initialiseModel();
+          }
+
           if(node[scope.tree.template.id]) {
             if(scope.options.limit !== 0 && scope.model.length === scope.options.limit) {
               scope.notification = 'You cannot select more than ' + scope.options.limit + ' items!';
