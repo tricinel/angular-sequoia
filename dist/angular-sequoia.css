@@ -87,8 +87,9 @@
       left: 5%;
       margin-left: -2.5%;
       position: fixed;
+      top: 10%;
       width: 90%;
-      z-index: 6; }
+      z-index: 9999; }
       @media (min-width: 786px) {
         .sequoia .sequoia-modal-container .sequoia-modal {
           left: 50%;
