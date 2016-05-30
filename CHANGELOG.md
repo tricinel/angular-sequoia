@@ -1,3 +1,8 @@
+###v0.2.17
+___
+
+* Fix modal positioning on mobile devices ([tricinel](http://github.com/tricinel))
+
 ###v0.2.16
 ___
 
