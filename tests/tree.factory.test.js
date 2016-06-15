@@ -16,12 +16,14 @@ describe('Sequoia Tree Factory', function() {
   beforeEach(module('ngSequoia'));
 
   var SequoiaTree,
+      Utils,
       log,
       NODE_TEMPLATE,
       BUTTONS;
 
-  beforeEach(inject(function(_SequoiaTree_, _$log_, _NODE_TEMPLATE_, _BUTTONS_){
+  beforeEach(inject(function(_SequoiaTree_, _SequoiaTreeUtils_, _$log_, _NODE_TEMPLATE_, _BUTTONS_){
     SequoiaTree = _SequoiaTree_;
+    Utils = _SequoiaTreeUtils_;
     log = _$log_;
     NODE_TEMPLATE = _NODE_TEMPLATE_;
     BUTTONS = _BUTTONS_;

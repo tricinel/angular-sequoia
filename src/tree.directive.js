@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  function sequoiaTreeDirective(Tree, BUTTONS, DEFAULT_OPTIONS, SORTABLE_OPTIONS){
+  function sequoiaTreeDirective(Tree, Utils, BUTTONS, DEFAULT_OPTIONS, SORTABLE_OPTIONS){
 
     return {
       restrict: 'AE',
@@ -15,10 +15,6 @@
         'path': '=?sequoiaTreePath'
       },
       link: function(scope) {
-        function initialiseModel() {
-          scope.model = scope.isMultiSelect ? _.isArray(scope.model) ? scope.model : [] : _.isString(scope.model) ? scope.model : '';
-        }
-
         function init() {
           /* Set the default options*/
           scope.options = _.defaults(scope.options || {}, DEFAULT_OPTIONS);
@@ -31,7 +27,7 @@
           scope.sortableOptions = _.assign({}, SORTABLE_OPTIONS, {onSort: handleSort});
           scope.tree = new Tree(scope.treeNodes, scope.template, scope.buttons);
 
-          initialiseModel();
+          scope.model = Utils.setModel(scope.isMultiSelect, scope.model);
 
           scope.containerStyle = !scope.inline ? { 'overflow': 'scroll', 'max-height': '400px' } : {};
         }
@@ -74,7 +70,7 @@
         scope.select = function(node) {
           //make sure that scope.model is setup
           if(_.isUndefined(scope.model)) {
-            initialiseModel();
+            scope.model = Utils.setModel(scope.isMultiSelect, scope.model);
           }
 
           if(node[scope.tree.template.id]) {
@@ -192,7 +188,7 @@
 
   }
 
-  sequoiaTreeDirective.$inject = ['SequoiaTree', 'BUTTONS', 'DEFAULT_OPTIONS', 'SORTABLE_OPTIONS'];
+  sequoiaTreeDirective.$inject = ['SequoiaTree', 'SequoiaTreeUtils', 'BUTTONS', 'DEFAULT_OPTIONS', 'SORTABLE_OPTIONS'];
 
   angular.module('ngSequoia')
     .directive('sequoiaTree', sequoiaTreeDirective);
