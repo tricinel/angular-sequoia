@@ -1,3 +1,8 @@
+###v0.3.0
+___
+
+* Refactor util functions from Factory and improve the model initialisation ([tricinel](http://github.com/tricinel))
+
 ###v0.2.17
 ___
 
