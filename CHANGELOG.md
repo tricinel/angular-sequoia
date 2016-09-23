@@ -1,3 +1,8 @@
+###v0.3.1
+___
+
+* Allow showSelected button to be hidden via a false flag ([tricinel](http://github.com/tricinel))
+
 ###v0.3.0
 ___
 
