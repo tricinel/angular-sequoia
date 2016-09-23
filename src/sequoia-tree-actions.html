@@ -1,5 +1,5 @@
 <ul>
-  <li data-ng-if="(model.length || onlySelected) && !isEditing">
+  <li data-ng-if="(model.length || onlySelected) && !isEditing && buttons.showSelected !== false">
     <a class="sequoia-button sequoia-button-info" href="" data-ng-click="toggleSelected()" data-ng-bind-html="model.length && !onlySelected ? buttons.showSelected : !model.length && onlySelected ? buttons.backToList : buttons.hideSelected"></a>
   </li>
 
