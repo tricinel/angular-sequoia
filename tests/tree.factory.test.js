@@ -140,7 +140,7 @@ describe('Sequoia Tree Factory', function() {
   it('create breadcrumbs', function() {
     var tree = new SequoiaTree(nodes,template),
         breadcrumbs = {
-          path: '[3][0]',
+          path: '[3]["nodes"][0]["nodes"]',
           nodes: [
             { title: BUTTONS.root },
             { _id: '345678', title: 'Title four', nodes: [{ _id: '901234', title: 'Subtitle one', nodes: [] }] },

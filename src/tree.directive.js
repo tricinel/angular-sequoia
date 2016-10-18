@@ -54,7 +54,7 @@
             scope.tree.setCurrentNodes(n[scope.tree.template.nodes]);
             scope.breadcrumbs = scope.tree.breadcrumbs(n[scope.tree.template.id]);
             scope.path = n;
-            scope.parentNode = scope.tree.findParentNode(scope.breadcrumbs);
+            scope.parentNode = scope.tree.findParentNode(scope.breadcrumbs.nodes);
           } else {
             scope.tree.setCurrentNodes();
             scope.breadcrumbs = { path: '', nodes: [] };
