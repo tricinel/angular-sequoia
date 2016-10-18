@@ -1,3 +1,9 @@
+###v0.3.4
+___
+
+* Fix root level and correct path to nodes ([tricinel](http://github.com/tricinel))
+* Fix sorting options at the root level ([tricinel](http://github.com/tricinel))
+
 ###v0.3.3
 ___
 
