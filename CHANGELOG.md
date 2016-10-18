@@ -1,3 +1,8 @@
+###v0.3.3
+___
+
+* Fix sorting overriding the entire tree when sorting a nested object ([tricinel](http://github.com/tricinel))
+
 ###v0.3.2
 ___
 
