@@ -33,7 +33,11 @@
         }
 
         function handleSort(evt) {
-          scope.treeNodes = Utils.updateNodesInPath(scope.treeNodes, scope.breadcrumbs.path, evt.models, scope.tree.template.nodes);
+          if(scope.breadcrumbs.path.length) {
+            scope.treeNodes = Utils.updateNodesInPath(scope.treeNodes, scope.breadcrumbs.path, evt.models, scope.tree.template.nodes);
+          } else {
+            scope.treeNodes = evt.models;
+          }
         }
 
         function paginate() {

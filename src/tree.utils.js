@@ -168,6 +168,7 @@
 
     service.updateNodesInPath = function(tree, path, nodes, key) {
       path = path + '.' + key;
+      console.log(path);
       return _.set(tree.slice(), path, nodes);
     };
 
