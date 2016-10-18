@@ -60,7 +60,7 @@
       for(var i=0;i<nodes.length;i++) {
         if(nodes[i][template.id] === id || service.exists(nodes[i][template.nodes], template.id, id, template)) {
           breadcrumbs.nodes.push(nodes[i]);
-          breadcrumbs.path += '[' + _.indexOf(nodes, nodes[i]) + ']';
+          breadcrumbs.path += '[' + _.indexOf(nodes, nodes[i]) + ']["' + template.nodes + '"]';
         }
         service.buildBreadCrumbs(id, nodes[i][template.nodes], template, rootText, breadcrumbs);
       }
@@ -167,7 +167,6 @@
     };
 
     service.updateNodesInPath = function(tree, path, nodes, key) {
-      path = path + '.' + key;
       return _.set(tree.slice(), path, nodes);
     };
 

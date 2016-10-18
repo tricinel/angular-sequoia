@@ -33,7 +33,11 @@
         }
 
         function handleSort(evt) {
-          scope.treeNodes = Utils.updateNodesInPath(scope.treeNodes, scope.breadcrumbs.path, evt.models, scope.tree.template.nodes);
+          if(scope.breadcrumbs.path.length) {
+            scope.treeNodes = Utils.updateNodesInPath(scope.treeNodes, scope.breadcrumbs.path, evt.models, scope.tree.template.nodes);
+          } else {
+            scope.treeNodes = evt.models;
+          }
         }
 
         function paginate() {
@@ -50,7 +54,7 @@
             scope.tree.setCurrentNodes(n[scope.tree.template.nodes]);
             scope.breadcrumbs = scope.tree.breadcrumbs(n[scope.tree.template.id]);
             scope.path = n;
-            scope.parentNode = scope.tree.findParentNode(scope.breadcrumbs);
+            scope.parentNode = scope.tree.findParentNode(scope.breadcrumbs.nodes);
           } else {
             scope.tree.setCurrentNodes();
             scope.breadcrumbs = { path: '', nodes: [] };
