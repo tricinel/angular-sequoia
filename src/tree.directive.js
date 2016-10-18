@@ -22,7 +22,7 @@
           scope.inline = scope.options.inline;
           scope.allowSelect = scope.options.allowSelect;
           scope.isMultiSelect = scope.options.limit === 1 ? false : true;
-          scope.breadcrumbs = [];
+          scope.breadcrumbs = { path: '', nodes: [] };
           scope.buttons = _.defaults(scope.options.buttons, BUTTONS);
           scope.sortableOptions = _.assign({}, SORTABLE_OPTIONS, {onSort: handleSort});
           scope.tree = new Tree(scope.treeNodes, scope.template, scope.buttons);
@@ -33,7 +33,7 @@
         }
 
         function handleSort(evt) {
-          scope.treeNodes = evt.models;
+          scope.treeNodes = Utils.updateNodesInPath(scope.treeNodes, scope.breadcrumbs.path, evt.models, scope.tree.template.nodes);
         }
 
         function paginate() {
@@ -53,7 +53,7 @@
             scope.parentNode = scope.tree.findParentNode(scope.breadcrumbs);
           } else {
             scope.tree.setCurrentNodes();
-            scope.breadcrumbs = [];
+            scope.breadcrumbs = { path: '', nodes: [] };
             scope.parentNode = null;
             scope.path = null;
           }

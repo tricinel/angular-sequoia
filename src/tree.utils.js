@@ -51,17 +51,18 @@
       return results;
     };
 
-    service.buildBreadCrumbs = function(id, nodes, breadcrumbs, template, rootText) {
+    service.buildBreadCrumbs = function(id, nodes, template, rootText, breadcrumbs) {
       nodes = nodes || [];
       var root = {};
       root[template.title] = rootText;
-      breadcrumbs = !breadcrumbs.length ? [root] : breadcrumbs;
+      breadcrumbs = _.isObject(breadcrumbs) ? breadcrumbs : { path: '', nodes: [root] };
 
       for(var i=0;i<nodes.length;i++) {
         if(nodes[i][template.id] === id || service.exists(nodes[i][template.nodes], template.id, id, template)) {
-          breadcrumbs.push(nodes[i]);
+          breadcrumbs.nodes.push(nodes[i]);
+          breadcrumbs.path += '[' + _.indexOf(nodes, nodes[i]) + ']';
         }
-        service.buildBreadCrumbs(id, nodes[i][template.nodes], breadcrumbs, template, rootText);
+        service.buildBreadCrumbs(id, nodes[i][template.nodes], template, rootText, breadcrumbs);
       }
 
       return breadcrumbs;
@@ -163,6 +164,11 @@
           return '';
         }
       }
+    };
+
+    service.updateNodesInPath = function(tree, path, nodes, key) {
+      path = path + '.' + key;
+      return _.set(tree.slice(), path, nodes);
     };
 
     return service;

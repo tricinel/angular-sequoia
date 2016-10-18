@@ -10,7 +10,8 @@ describe('Sequoia Tree Factory', function() {
   nodes = [
     { _id: '1234', title: 'Title one', nodes: [] },
     { _id: '5678', title: 'Title two', nodes: [] },
-    { _id: '9012', title: 'Title three', nodes: [{ _id: '3456', title: 'Subtitle one', nodes: [] }, { _id: '7890', title: 'Subtitle two', nodes: [{ _id: '12345', title: 'Subsubtitle one', nodes: [] }] }] }
+    { _id: '9012', title: 'Title three', nodes: [{ _id: '3456', title: 'Subtitle one', nodes: [] }, { _id: '7890', title: 'Subtitle two', nodes: [{ _id: '12345', title: 'Subsubtitle one', nodes: [] }] }] },
+    { _id: '345678', title: 'Title four', nodes: [{ _id: '901234', title: 'Subtitle one', nodes: [] }] }
   ];
 
   beforeEach(module('ngSequoia'));
@@ -125,7 +126,7 @@ describe('Sequoia Tree Factory', function() {
     var tree = new SequoiaTree(nodes,template),
         found = tree.find('title', 'sub');
 
-    expect(found.length).toBe(3);
+    expect(found.length).toBe(4);
   });
 
   it('should find selected items', function() {
@@ -138,9 +139,16 @@ describe('Sequoia Tree Factory', function() {
 
   it('create breadcrumbs', function() {
     var tree = new SequoiaTree(nodes,template),
-        breadcrumbs = [{ title: BUTTONS.root },{ _id: '9012', title: 'Title three', nodes: [{ _id: '3456', title: 'Subtitle one', nodes: []}, { _id: '7890', title: 'Subtitle two', nodes: [{ _id: '12345', title: 'Subsubtitle one', nodes: []}]}]}, { _id: '7890', title: 'Subtitle two', nodes: [{ _id: '12345', title: 'Subsubtitle one', nodes: []}]}, { _id: '12345', title: 'Subsubtitle one', nodes: []}];
+        breadcrumbs = {
+          path: '[3][0]',
+          nodes: [
+            { title: BUTTONS.root },
+            { _id: '345678', title: 'Title four', nodes: [{ _id: '901234', title: 'Subtitle one', nodes: [] }] },
+            { _id: '901234', title: 'Subtitle one', nodes: [] }
+          ]
+        };
 
-    expect(tree.breadcrumbs('12345')).toEqual(breadcrumbs);
+    expect(tree.breadcrumbs('901234')).toEqual(breadcrumbs);
   });
 
   it('should get the parent node', function() {
