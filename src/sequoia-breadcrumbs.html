@@ -1,4 +1,4 @@
-<li data-ng-if="breadcrumbs.length" data-ng-repeat="link in breadcrumbs" data-ng-class="$last ? 'last' : ''">
+<li data-ng-if="breadcrumbs.nodes.length" data-ng-repeat="link in breadcrumbs.nodes" data-ng-class="$last ? 'last' : ''">
   <a data-ng-if="!$last" href="" data-ng-click="load(link)" data-ng-bind="link[tree.template.title]"></a>
   <span data-ng-if="$last" data-ng-bind="link[tree.template.title]"></span>
 </li>

@@ -65,7 +65,7 @@
     };
 
     SequoiaTree.prototype.breadcrumbs = function(id) {
-      return Utils.buildBreadCrumbs(id,this.tree,[], this.template, this.buttons.root);
+      return Utils.buildBreadCrumbs(id, this.tree, this.template, this.buttons.root);
     };
 
     SequoiaTree.prototype.find = function(key,value) {
