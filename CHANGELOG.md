@@ -1,3 +1,8 @@
+###v0.3.5
+___
+
+* Remove unnecessary call to load function ([tricinel](http://github.com/tricinel))
+
 ###v0.3.4
 ___
 
