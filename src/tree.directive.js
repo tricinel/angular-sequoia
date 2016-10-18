@@ -139,10 +139,6 @@
           }
         });
 
-        // if(!scope.inline) {
-          scope.load();
-        // }
-
         /* Handle Modal */
         scope.showModal = function() {
           scope.load();
