@@ -165,6 +165,9 @@
         };
 
         scope.addNode = function(node) {
+          // Because of the pruneTree function, we are removing the subnodes when we remove the last ever node, so we need to make sure it is still there when we add a new node
+          node = Utils.ensureChildren(node, this.template);
+
           if(scope.tree.isValidNode(node)) {
             scope.load(node);
           }

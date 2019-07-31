@@ -170,6 +170,14 @@
       return _.set(tree.slice(), path, nodes);
     };
 
+    service.ensureChildren = function (node, template) {
+      if (!_.isArray(node[template.nodes])) {
+        node[template.nodes] = [];
+      }
+
+      return node;
+    };
+
     return service;
   }
 
