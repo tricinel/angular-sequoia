@@ -268,6 +268,9 @@
         };
 
         scope.addNode = function(node) {
+          // Because of the pruneTree function, we are removing the subnodes when we remove the last ever node, so we need to make sure it is still there when we add a new node
+          node = Utils.ensureChildren(node, this.template);
+
           if(scope.tree.isValidNode(node)) {
             scope.load(node);
           }
@@ -297,6 +300,7 @@
     .directive('sequoiaTree', sequoiaTreeDirective);
 
 })();
+
 (function() {
   'use strict';
 
@@ -597,6 +601,14 @@
 
     service.updateNodesInPath = function(tree, path, nodes, key) {
       return _.set(tree.slice(), path, nodes);
+    };
+
+    service.ensureChildren = function (node, template) {
+      if (!_.isArray(node[template.nodes])) {
+        node[template.nodes] = [];
+      }
+
+      return node;
     };
 
     return service;
