@@ -166,7 +166,7 @@
       }
     };
 
-    service.updateNodesInPath = function(tree, path, nodes, key) {
+    service.updateNodesInPath = function(tree, path, nodes, _key) {
       return _.set(tree.slice(), path, nodes);
     };
 
