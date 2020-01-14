@@ -1,3 +1,8 @@
+###v0.3.8
+___
+
+* Fix adding a node when the tree is empty ([Bogdan Lazar](http://github.com/Bogdan Lazar))
+
 ###v0.3.5
 ___
 

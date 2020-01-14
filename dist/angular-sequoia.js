@@ -127,12 +127,14 @@
           scope.isMultiSelect = scope.options.limit === 1 ? false : true;
           scope.breadcrumbs = { path: '', nodes: [] };
           scope.buttons = _.defaults(scope.options.buttons, BUTTONS);
-          scope.sortableOptions = _.assign({}, SORTABLE_OPTIONS, {onSort: handleSort});
+          scope.sortableOptions = _.assign({}, SORTABLE_OPTIONS, { onSort: handleSort });
           scope.tree = new Tree(scope.treeNodes, scope.template, scope.buttons);
 
           scope.model = Utils.setModel(scope.isMultiSelect, scope.model);
 
           scope.containerStyle = !scope.inline ? { 'overflow': 'scroll', 'max-height': '400px' } : {};
+
+          scope._cachedNode = null;
         }
 
         function handleSort(evt) {
@@ -152,6 +154,12 @@
           scope.onlySelected = false;
 
           var n = node ? node : scope.path ? scope.path : null;
+
+          if (n && scope._cachedNode) {
+            // We need to make sure the node has children
+            n = Utils.ensureChildren(n, this.template);
+            scope._cachedNode = null;
+          }
 
           if(scope.tree.isValidNode(n)) {
             scope.tree.setCurrentNodes(n[scope.tree.template.nodes]);
@@ -236,9 +244,9 @@
           }
         });
 
-        scope.$watchCollection('path', function(newVal) {
-          if(newVal) {
-            scope.load();
+        scope.$watchCollection('path', function (newVal) {
+          if (newVal) {
+            scope.load(scope._cachedNode);
           }
         });
 
@@ -267,12 +275,14 @@
           scope.isEditing = !scope.isEditing;
         };
 
-        scope.addNode = function(node) {
+        scope.addNode = function (node) {
 
-          if(scope.tree.isValidNode(node)) {
+          if (typeof node !== 'undefined') {
             // Because of the pruneTree function, we are removing the subnodes when we remove the last ever node, so we need to make sure it is still there when we add a new node
             node = Utils.ensureChildren(node, this.template);
+          }
 
+          if(scope.tree.isValidNode(node)) {
             scope.load(node);
           }
 
@@ -282,9 +292,13 @@
           scope.isEditing = true;
         };
 
-        scope.remove = function(node) {
+        scope.remove = function (node) {
+          node = Utils.ensureChildren(node, this.template);
+          if (node[scope.tree.template.nodes].length < 1) {
+            scope._cachedNode = scope.tree.findParentNode(scope.breadcrumbs.nodes);
+          }
+
           scope.tree.removeNode(node);
-          paginate();
         };
 
         scope.closeNotification = function() {
@@ -600,7 +614,7 @@
       }
     };
 
-    service.updateNodesInPath = function(tree, path, nodes, key) {
+    service.updateNodesInPath = function(tree, path, nodes, _key) {
       return _.set(tree.slice(), path, nodes);
     };
 
