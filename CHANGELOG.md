@@ -1,7 +1,12 @@
+###v0.3.10
+___
+
+* Fix removing subitems from empty top level node ([tricinel](http://github.com/tricinel))
+
 ###v0.3.8
 ___
 
-* Fix adding a node when the tree is empty ([Bogdan Lazar](http://github.com/Bogdan Lazar))
+* Fix adding a node when the tree is empty ([tricinel](http://github.com/tricinel))
 
 ###v0.3.5
 ___
