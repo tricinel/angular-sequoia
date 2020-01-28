@@ -117,7 +117,15 @@
         'options': '=?',
         'path': '=?sequoiaTreePath'
       },
-      link: function(scope) {
+      link: function (scope) {
+        function handleSort(evt) {
+          if(scope.breadcrumbs.path.length) {
+            scope.treeNodes = Utils.updateNodesInPath(scope.treeNodes, scope.breadcrumbs.path, evt.models, scope.tree.template.nodes);
+          } else {
+            scope.treeNodes = evt.models;
+          }
+        }
+
         function init() {
           /* Set the default options*/
           scope.options = _.defaults(scope.options || {}, DEFAULT_OPTIONS);
@@ -135,14 +143,6 @@
           scope.containerStyle = !scope.inline ? { 'overflow': 'scroll', 'max-height': '400px' } : {};
 
           scope._cachedNode = null;
-        }
-
-        function handleSort(evt) {
-          if(scope.breadcrumbs.path.length) {
-            scope.treeNodes = Utils.updateNodesInPath(scope.treeNodes, scope.breadcrumbs.path, evt.models, scope.tree.template.nodes);
-          } else {
-            scope.treeNodes = evt.models;
-          }
         }
 
         function paginate() {
