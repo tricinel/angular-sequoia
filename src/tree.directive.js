@@ -191,7 +191,10 @@
 
         scope.remove = function (node) {
           node = Utils.ensureChildren(node, this.template);
-          if (node[scope.tree.template.nodes].length < 1) {
+          var parentNodeIsRoot = scope.breadcrumbs.nodes.length > 2;
+          var hasSiblings = node[scope.tree.template.nodes].length > 0;
+
+          if (!hasSiblings && parentNodeIsRoot) {
             scope._cachedNode = scope.tree.findParentNode(scope.breadcrumbs.nodes);
           }
 

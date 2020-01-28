@@ -14,6 +14,11 @@ function MainController($timeout) {
   var tree = [
     {
       _id: _.uniqueId(),
+      title: 'Empty top node',
+      nodes: []
+    },
+    {
+      _id: _.uniqueId(),
       title: 'Title one',
       nodes: [
         {
