@@ -59,8 +59,8 @@
     height: 100%;
     width: 100%; }
     .sequoia .sequoia-modal-container .sequoia-overlay {
-      position: fixed;
       background: rgba(255, 255, 255, 0.64);
+      position: fixed;
       left: 0px;
       top: 0px;
       width: 100%;

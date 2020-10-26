@@ -1,3 +1,8 @@
+###v0.3.12
+___
+
+* Fix pagination bug for infinite scroll when switching from selected to regular nodes ([tricinel](http://github.com/tricinel))
+
 ###v0.3.10
 ___
 

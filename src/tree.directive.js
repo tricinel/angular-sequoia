@@ -121,15 +121,15 @@
         scope.toggleSelected = function() {
           if(scope.onlySelected) {
             scope.onlySelected = false;
-            scope.tree.setCurrentNodes(scope.tree.getNodesInPath());
+            scope.load();
           } else {
             scope.onlySelected = true;
             var selected = scope.tree.findSelected(scope.model);
             scope.tree.setNodesInPath(scope.tree.nodes);
             scope.tree.setCurrentNodes(selected);
+            scope.tree.resetPagination();
+            paginate();
           }
-
-          paginate();
         };
 
         init();
